@@ -1,4 +1,4 @@
-package AccountBook;
+package login;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -16,8 +16,8 @@ import java.awt.FlowLayout;
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textPw;
+	private JTextField textId;
 
 	/**
 	 * Launch the application.
@@ -50,68 +50,68 @@ public class Login extends JFrame {
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(0, 4, 0, 0));
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		panel_1.add(lblNewLabel_4);
+		JLabel lbl1 = new JLabel("");
+		panel_1.add(lbl1);
 		
-		JLabel lblNewLabel_6 = new JLabel("");
-		panel_1.add(lblNewLabel_6);
+		JLabel lbl2 = new JLabel("");
+		panel_1.add(lbl2);
 		
-		JLabel lblNewLabel_8 = new JLabel("");
-		panel_1.add(lblNewLabel_8);
+		JLabel lbl3 = new JLabel("");
+		panel_1.add(lbl3);
 		
-		JLabel lblNewLabel_10 = new JLabel("");
-		panel_1.add(lblNewLabel_10);
+		JLabel lbl4 = new JLabel("");
+		panel_1.add(lbl4);
 		
-		JLabel lblNewLabel_11 = new JLabel("");
-		panel_1.add(lblNewLabel_11);
+		JLabel lbl5 = new JLabel("");
+		panel_1.add(lbl5);
 		
-		JLabel lblNewLabel_1 = new JLabel("ID");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(lblNewLabel_1);
+		JLabel lblId = new JLabel("ID");
+		lblId.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(lblId);
 		
-		textField_1 = new JTextField();
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
+		textId = new JTextField();
+		panel_1.add(textId);
+		textId.setColumns(10);
 		
-		JLabel lblNewLabel_7 = new JLabel("");
-		panel_1.add(lblNewLabel_7);
+		JLabel lbl6 = new JLabel("");
+		panel_1.add(lbl6);
 		
-		JLabel lblNewLabel_12 = new JLabel("");
-		panel_1.add(lblNewLabel_12);
+		JLabel lbl7 = new JLabel("");
+		panel_1.add(lbl7);
 		
-		JLabel lblNewLabel_2 = new JLabel("PW");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(lblNewLabel_2);
+		JLabel lblPw = new JLabel("PW");
+		lblPw.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(lblPw);
 		
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
+		textPw = new JTextField();
+		panel_1.add(textPw);
+		textPw.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		panel_1.add(lblNewLabel_3);
+		JLabel lbl8 = new JLabel("");
+		panel_1.add(lbl8);
 		
-		JLabel lblNewLabel_9 = new JLabel("");
-		panel_1.add(lblNewLabel_9);
+		JLabel lbl9 = new JLabel("");
+		panel_1.add(lbl9);
 		
-		JLabel lblNewLabel_13 = new JLabel("");
-		panel_1.add(lblNewLabel_13);
+		JLabel lbl10 = new JLabel("");
+		panel_1.add(lbl10);
 		
-		JLabel lblNewLabel_14 = new JLabel("");
-		panel_1.add(lblNewLabel_14);
+		JLabel lbl11 = new JLabel("");
+		panel_1.add(lbl11);
 		
-		JLabel lblNewLabel_5 = new JLabel("");
-		panel_1.add(lblNewLabel_5);
+		JLabel lbl12 = new JLabel("");
+		panel_1.add(lbl12);
 		
 		JPanel panel_2 = new JPanel();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_2.getLayout();
 		flowLayout_1.setVgap(20);
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Login");
-		panel_2.add(btnNewButton);
+		JButton btnLogin = new JButton("Login");
+		panel_2.add(btnLogin);
 		
-		JButton btnNewButton_1 = new JButton("Join");
-		panel_2.add(btnNewButton_1);
+		JButton btnJoin = new JButton("Join");
+		panel_2.add(btnJoin);
 		
 		JPanel panel = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
