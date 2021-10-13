@@ -1,5 +1,9 @@
 package AccountBook;
 
+import java.sql.DriverManager;
+
+import com.sun.corba.se.pept.transport.Connection;
+
 public class InfoDAO {
 	
 	static {
@@ -16,8 +20,8 @@ public class InfoDAO {
 		String password = "12345";
 		Connection con=null;
 		try {
-			con = DriverManager.getConnection(url, user, password);
-		} catch (SQLException e) {			
+			con = (Connection) DriverManager.getConnection(url, user, password);
+		} catch (Exception e) {			
 			e.printStackTrace();
 		}
 		return con;
