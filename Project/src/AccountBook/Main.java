@@ -63,14 +63,14 @@ public class Main extends JFrame {
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		JLabel lblNewLabel_1 = new JLabel("Expence");
 		panel.add(lblNewLabel_1);
 		
 		textField_1 = new JTextField();
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
+		JLabel lblNewLabel_2 = new JLabel("Total");
 		panel.add(lblNewLabel_2);
 		
 		textField_2 = new JTextField();
