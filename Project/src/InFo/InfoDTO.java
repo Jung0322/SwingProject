@@ -1,4 +1,4 @@
-package AccountBook;
+package InFo;
 
 import java.util.Date;
 

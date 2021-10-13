@@ -1,4 +1,4 @@
-package AccountBook;
+package User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

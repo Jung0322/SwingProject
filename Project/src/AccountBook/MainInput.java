@@ -2,6 +2,8 @@ package AccountBook;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
 public class MainInput extends JFrame {
+	
+	private static MainInput frame;
 
 	private JPanel contentPane;
 
@@ -19,7 +23,7 @@ public class MainInput extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainInput frame = new MainInput();
+					frame = new MainInput();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,12 +43,32 @@ public class MainInput extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("\uC218\uC785");
-		btnNewButton.setBounds(72, 99, 125, 31);
-		contentPane.add(btnNewButton);
+		JButton income = new JButton("\uC218\uC785");
+		income.setBounds(72, 99, 125, 31);
+		income.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				income in = new income();
+				in.setVisible(true);
+				frame.setVisible(false);
+				
+			}
+		});
+		contentPane.add(income);
 		
-		JButton btnNewButton_1 = new JButton("\uC9C0\uCD9C");
-		btnNewButton_1.setBounds(227, 99, 125, 31);
-		contentPane.add(btnNewButton_1);
+		JButton expense = new JButton("\uC9C0\uCD9C");
+		expense.setBounds(227, 99, 125, 31);
+		expense.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Expense out = new Expense();
+				out.setVisible(true);
+				frame.setVisible(false);
+				
+			}
+		});
+		contentPane.add(expense);
 	}
 }

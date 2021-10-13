@@ -23,25 +23,25 @@ import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.Font;
 
-public class Update extends JFrame  {
+public class Update extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_2;
 	private JComboBox<String> combdBox;
-	String PayKind[] = { "지출 종류1", "지출 종류2", "지출 종류3", "지출 종류4" };
-	String IncomeKind[] = { "수입 종류1", "수입 종류2", "수입 종류3", "수입 종류4" };
-	JPanel panel_1;
+	private String PayKind[] = { "식비", "교통", "주거/통신", "경조사/회비", "패션/미용", "교육", "문화생활", "기타" };
+	private String IncomeKind[] = { "월급", "부수입", "상여", "금융소득", "용돈", "기타" };
+	private JPanel panel_1;
+	private static Update frame;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		System.out.println("ddd");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Update frame = new Update();
+					frame = new Update();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,14 +60,32 @@ public class Update extends JFrame  {
 
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
-		
-				JButton btnNewButton_1 = new JButton("\uD655\uC778");
-				btnNewButton_1.setHorizontalAlignment(SwingConstants.RIGHT);
-				panel.add(btnNewButton_1);
 
-		JButton btnNewButton = new JButton("\uC0AD\uC81C");
-		btnNewButton.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel.add(btnNewButton);
+		JButton confirm = new JButton("\uD655\uC778");
+		confirm.setHorizontalAlignment(SwingConstants.RIGHT);
+		confirm.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main main = new Main();
+				main.setVisible(true);
+				frame.setVisible(false);
+				;
+				
+			}
+		});
+		panel.add(confirm);
+
+		JButton delete = new JButton("\uC0AD\uC81C");
+		delete.setHorizontalAlignment(SwingConstants.RIGHT);
+		delete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		panel.add(delete);
 
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -131,6 +149,5 @@ public class Update extends JFrame  {
 		group.add(rdbtnNewRadioButton);
 		group.add(rdbtnNewRadioButton_1);
 	}
-
 
 }
