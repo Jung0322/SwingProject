@@ -8,24 +8,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
+@Setter
+@Getter 
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+
 public class InfoDTO {
-	
-	@Setter
-	@Getter 
-	@NoArgsConstructor
-	@AllArgsConstructor
-	@ToString
-
-	public class EmpDTO {
-		private int no;
-		private int money;
-		private int content;
-		private int sort;
-		private Date day;
-		private int id;
-		
-	
-	
-
+   
+      private int no;
+      private int money;
+      private String content;
+      private String sort;
+      private Date day;
+      private String id;
+      
+   
 }
-}
+
