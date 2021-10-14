@@ -6,10 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import User.UserDAO;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridLayout;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
+import javax.lang.model.element.Element;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -18,9 +24,10 @@ import javax.swing.SwingConstants;
 public class Join extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField2;
-	private JTextField textField_2;
+	private JTextField id;
+	private JTextField name;
+	private JTextField password;
+	public UserDAO dao =  new UserDAO();
 
 	/**
 	 * Launch the application.
@@ -64,36 +71,41 @@ public class Join extends JFrame {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(lblNewLabel_1);
 
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(textField);
-		textField.setColumns(10);
+		id = new JTextField();
+		id.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_1.add(id);
+		id.setColumns(10);
 
-		JButton btnNewButton = new JButton("중복 확인");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton overlop = new JButton("중복 확인");
+		overlop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Boolean flag = dao.overlop(id.getText());
+				if(flag) {
+					System.out.println("aa");
+					JOptionPane.showMessageDialog(null, "존재하는 id가 있습니다.");
+				}
 			}
 		});
-		panel_1.add(btnNewButton);
+		panel_1.add(overlop);
 
-		JLabel lblNewLabel_2 = new JLabel("비밀번호 입력 : ");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_1.add(lblNewLabel_2);
+		JLabel Label = new JLabel("\uC774\uB984 \uC785\uB825 : ");
+		Label.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_1.add(Label);
 
-		textField2 = new JTextField();
-		panel_1.add(textField2);
-		textField2.setColumns(10);
+		name = new JTextField();
+		panel_1.add(name);
+		name.setColumns(10);
 
 		JLabel lblNewLabel_3 = new JLabel("");
 		panel_1.add(lblNewLabel_3);
 
-		JLabel lblNewLabel_4 = new JLabel("비밀번호 확인 : ");
+		JLabel lblNewLabel_4 = new JLabel("\uBE44\uBC00\uBC88\uD638 \uC785\uB825 : ");
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(lblNewLabel_4);
 
-		textField_2 = new JTextField();
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
+		password = new JTextField();
+		panel_1.add(password);
+		password.setColumns(10);
 
 		JLabel lblNewLabel_5 = new JLabel("");
 		panel_1.add(lblNewLabel_5);
@@ -101,19 +113,29 @@ public class Join extends JFrame {
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 
-		JButton btnNewButton_1 = new JButton("확인");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton confirm = new JButton("확인");
+		confirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Boolean flag = dao.join(id.getText(), password.getText(), name.getText());
+				if(flag) {
+					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
+					
+				}else {
+					JOptionPane.showMessageDialog(null, "회원가입이 실패하였습니다.");
+				}
 			}
 		});
-		panel_2.add(btnNewButton_1);
+		panel_2.add(confirm);
 
-		JButton btnNewButton_2 = new JButton("취소");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton cancel = new JButton("취소");
+		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				id.setText("");
+				password.setText("");
+				name.setText("");
 			}
 		});
-		panel_2.add(btnNewButton_2);
+		panel_2.add(cancel);
 	}
 
 }
