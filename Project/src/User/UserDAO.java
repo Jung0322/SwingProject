@@ -1,10 +1,9 @@
-package InFo;
+package User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class InfoDAO {
-
+public class UserDAO {
 	static {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
@@ -25,5 +24,4 @@ public class InfoDAO {
 		}
 		return con;
 	}
-
 }
