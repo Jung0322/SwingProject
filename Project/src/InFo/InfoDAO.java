@@ -112,8 +112,6 @@ public class InfoDAO {
 	}
 
 
-
-	
 	public boolean update(Date day, String content, int sort,int money,int no, String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -149,7 +147,8 @@ public class InfoDAO {
 	return updateFlag;
 	
 	}
-
+	
+	// 입력(Input)
 	public Boolean Input(String date, String content, String money, String sort,String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -183,11 +182,5 @@ public class InfoDAO {
 		}
 		return insertFlag;
 	}
-
-
-
-
-
-
 	
 }

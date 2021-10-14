@@ -41,10 +41,12 @@ public class Input extends JFrame implements ActionListener{
 	private static Input frame;
 	public InfoDAO dao = new InfoDAO();
 	
-	
+	//sort를 가져오기 위하여 kind 선언
 	private String kind = "지출";
+	//userid는 항상 불러와야 함
 	private String userid;
-
+	
+//더이상 독립적인 페이지가 아니므로 생략
 //	/**
 //	 * Launch the application.
 //	 */
@@ -93,7 +95,7 @@ public class Input extends JFrame implements ActionListener{
 		panel_1.setLayout(new GridLayout(3, 2, 0, 0));
 
 		JLabel lblNewLabel_1 = new JLabel("\uB0A0\uC9DC");
-		lblNewLabel_1.setFont(new Font("����", Font.PLAIN, 20));
+		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_1);
 
 		tfDate = new JTextField();
@@ -101,7 +103,7 @@ public class Input extends JFrame implements ActionListener{
 		tfDate.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("\uB0B4\uC5ED");
-		lblNewLabel_2.setFont(new Font("����", Font.PLAIN, 20));
+		lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_2);
 
 		combdBox = new JComboBox();
@@ -109,7 +111,7 @@ public class Input extends JFrame implements ActionListener{
 		panel_1.add(combdBox);
 
 		JLabel lblNewLabel_3 = new JLabel("\uAE08\uC561");
-		lblNewLabel_3.setFont(new Font("����", Font.PLAIN, 20));
+		lblNewLabel_3.setFont(new Font("굴림", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_3);
 
 		tfMoney = new JTextField();
@@ -179,12 +181,9 @@ public class Input extends JFrame implements ActionListener{
 				frame.setVisible(false);
 				
 			}
-			
-			
+						
 		}
 		
 	}
-
-
 
 }
