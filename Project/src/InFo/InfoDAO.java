@@ -64,5 +64,45 @@ public class InfoDAO {
 	return updateFlag;
 	
 	}
+
+	public Boolean Input(String date, String content, String money, String sort,String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		boolean insertFlag = false;
+		
+		try {
+			con = getConnection();
+			
+			
+			String sql = "insert into InFo(no,money,content,sort,day,id) values (seq_no.nextval,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,Integer.parseInt(money));
+			pstmt.setString(2, content);
+			pstmt.setString(3, sort);
+			pstmt.setString(4, date);
+			pstmt.setString(5, id);
+			
+			int result = pstmt.executeUpdate();
+			if(result>0) {
+				insertFlag=true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				con.close();				
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return insertFlag;
+	}
+
+
+
+
+
+
 	
 }

@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import InFo.InfoDAO;
+import User.UserDAO;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -16,6 +20,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
@@ -24,34 +29,39 @@ import javax.swing.JRadioButton;
 import java.awt.Font;
 import static AccountBook.login.id;
 
-public class Update extends JFrame {
+public class Input extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_2;
+	private JTextField tfDate;
+	private JTextField tfMoney;
 	private JComboBox<String> combdBox;
-	private String PayKind[] = { "½Äºñ", "±³Åë", "ÁÖ°Å/Åë½Å", "°æÁ¶»ç/È¸ºñ", "ÆĞ¼Ç/¹Ì¿ë", "±³À°", "¹®È­»ıÈ°", "±âÅ¸" };
-	private String IncomeKind[] = { "¿ù±Ş", "ºÎ¼öÀÔ", "»ó¿©", "±İÀ¶¼Òµæ", "¿ëµ·", "±âÅ¸" };
+	private String PayKind[] = { "ì‹ë¹„", "êµí†µ", "ì£¼ê±°/í†µì‹ ", "ê²½ì¡°ì‚¬/íšŒë¹„", "íŒ¨ì…˜/ë¯¸ìš©", "êµìœ¡", "ë¬¸í™”ìƒí™œ", "ê¸°íƒ€" };
+	private String IncomeKind[] = { "ì›”ê¸‰", "ë¶€ìˆ˜ì…", "ìƒì—¬", "ê¸ˆìœµì†Œë“", "ìš©ëˆ", "ê¸°íƒ€" };
 	private JPanel panel_1;
-	private static Update frame;
+	private static Input frame;
+	public InfoDAO dao = new InfoDAO();
+	
+	
+	private String kind = "ì§€ì¶œ";
+	private String userid;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new Update();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					frame = new Input();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-	public Update() {
+	public Input(String userid) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -64,16 +74,7 @@ public class Update extends JFrame {
 
 		JButton confirm = new JButton("\uD655\uC778");
 		confirm.setHorizontalAlignment(SwingConstants.RIGHT);
-		confirm.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Main main = new Main();
-				main.setVisible(true);
-				frame.setVisible(false);
-				
-			}
-		});
+		confirm.addActionListener(this);
 		panel.add(confirm);
 
 		JButton delete = new JButton("\uC0AD\uC81C");
@@ -92,15 +93,15 @@ public class Update extends JFrame {
 		panel_1.setLayout(new GridLayout(3, 2, 0, 0));
 
 		JLabel lblNewLabel_1 = new JLabel("\uB0A0\uC9DC");
-		lblNewLabel_1.setFont(new Font("±¼¸²", Font.PLAIN, 20));
+		lblNewLabel_1.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_1);
 
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
+		tfDate = new JTextField();
+		panel_1.add(tfDate);
+		tfDate.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("\uB0B4\uC5ED");
-		lblNewLabel_2.setFont(new Font("±¼¸²", Font.PLAIN, 20));
+		lblNewLabel_2.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_2);
 
 		combdBox = new JComboBox();
@@ -108,18 +109,18 @@ public class Update extends JFrame {
 		panel_1.add(combdBox);
 
 		JLabel lblNewLabel_3 = new JLabel("\uAE08\uC561");
-		lblNewLabel_3.setFont(new Font("±¼¸²", Font.PLAIN, 20));
+		lblNewLabel_3.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_3);
 
-		textField_2 = new JTextField();
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
+		tfMoney = new JTextField();
+		panel_1.add(tfMoney);
+		tfMoney.setColumns(10);
 
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.NORTH);
 
-		JLabel lblNewLabel = new JLabel("\uC218\uC815");
-		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 25));
+		JLabel lblNewLabel = new JLabel("\uC785\uB825");
+		lblNewLabel.setFont(new Font("êµ´ë¦¼", Font.PLAIN, 25));
 		panel_2.add(lblNewLabel);
 
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("\uC218\uC785");
@@ -128,6 +129,8 @@ public class Update extends JFrame {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				combdBox.setModel(new DefaultComboBoxModel(IncomeKind));
+				kind = "ìˆ˜ì…";
+				
 
 			}
 		});
@@ -139,7 +142,7 @@ public class Update extends JFrame {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				combdBox.setModel(new DefaultComboBoxModel(PayKind));
-
+				kind="ì§€ì¶œ";
 			}
 		});
 		rdbtnNewRadioButton_1.setSelected(true);
@@ -148,6 +151,40 @@ public class Update extends JFrame {
 		ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnNewRadioButton);
 		group.add(rdbtnNewRadioButton_1);
+		
+		
+		this.userid = userid;
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		
+		if(cmd.equals("í™•ì¸")) {
+			//ì‚¬ìš©ì ì…ë ¥ê°’ ê°€ì ¸ì˜¤ê¸°
+			//ë¼ë””ì˜¤ ë²„íŠ¼ ì„ íƒëœ ê°’ ê°€ì ¸ì˜¤ê¸°
+			System.out.println(kind);
+			//ë‚ ì§œ ê°€ì ¸ì˜¤ê¸°
+			System.out.println(tfDate.getText());
+			//ë‚´ì—­ ê°€ì ¸ì˜¤ê¸°
+			System.out.println(combdBox.getSelectedItem().toString());
+			//ê¸ˆì•¡ ê°€ì ¸ì˜¤ê¸°
+			System.out.println(tfMoney.getText());
+			
+			
+			boolean flag =  dao.Input(tfDate.getText(), combdBox.getSelectedItem().toString(),tfMoney.getText(), kind,userid);
+			if(flag) {
+				Main main = new Main(userid);
+				main.setVisible(true);
+				frame.setVisible(false);
+				
+			}
+			
+			
+		}
+		
+	}
+
+
 
 }

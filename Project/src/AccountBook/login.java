@@ -125,7 +125,7 @@ public class login extends JFrame {
 				if(flag) {
 					JOptionPane.showMessageDialog(null, "로그인이 완료되었습니다.");
 					id = textId.getText();
-					Main main = new Main();
+					Main main = new Main(id);					
 					main.setVisible(true);
 					frame.setVisible(false);
 				}else {

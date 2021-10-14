@@ -13,40 +13,46 @@ import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class Main extends JFrame {
+public class Main extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTable table;
+	
+	//receive userid 
+	private String userid;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main frame = new Main();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+// 더이상 독립적인 페이지가 아니므로 생략
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Main frame = new Main();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Main() {
+	public Main(String userid) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
 		contentPane = new JPanel();
@@ -56,6 +62,10 @@ public class Main extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
+		
+		JLabel lblUserId = new JLabel(userid);
+		panel.add(lblUserId);
+		
 		
 		JLabel lblNewLabel = new JLabel("Income");
 		panel.add(lblNewLabel);
@@ -108,7 +118,23 @@ public class Main extends JFrame {
 			}
 		));
 		scrollPane.setViewportView(table);
+		
+		
+		this.userid = userid;
 	}
+
+@Override
+public void actionPerformed(ActionEvent e) {
+	String cmd = e.getActionCommand();
+	
+	if(cmd.equals("input")) {
+		Input input = new Input(userid);
+		input.setVisible(true);
+	}
+	
+}
+	
+	
 
 }
 
