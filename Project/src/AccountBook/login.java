@@ -6,9 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import User.UserDAO;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
@@ -19,6 +26,8 @@ public class login extends JFrame {
 	private JTextField textPw;
 	private JTextField textId;
 	public static String id;
+	public UserDAO dao = new UserDAO();
+	private static login frame;
 	/**
 	 * Launch the application.
 	 */
@@ -26,7 +35,7 @@ public class login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					login frame = new login();
+					frame = new login();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -108,9 +117,34 @@ public class login extends JFrame {
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		
 		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Boolean flag =  dao.login(textId.getText(), textPw.getText());
+				if(flag) {
+					JOptionPane.showMessageDialog(null, "로그인이 완료되었습니다.");
+					Main main = new Main();
+					main.setVisible(true);
+					frame.setVisible(false);
+				}else {
+					JOptionPane.showMessageDialog(null, "로그인이 실패히었습니다.");
+				}
+				
+			}
+		});
 		panel_2.add(btnLogin);
 		
 		JButton btnJoin = new JButton("Join");
+		btnJoin.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Join join = new Join();
+				join.setVisible(true);
+				frame.setVisible(false);
+			}
+		});
 		panel_2.add(btnJoin);
 		
 		JPanel panel = new JPanel();
