@@ -5,18 +5,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-<<<<<<< HEAD
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-=======
+
 import java.sql.SQLException;
 
 import javax.naming.spi.DirStateFactory.Result;
 
 import oracle.jdbc.internal.XSPrincipal.Flag;
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
+
 
 public class UserDAO {
 	static {
@@ -39,7 +39,7 @@ public class UserDAO {
 		}
 		return con;
 	}
-<<<<<<< HEAD
+
 	
 	public List<UserDTO> select() {
 		Connection con = null;
@@ -58,7 +58,6 @@ public class UserDAO {
 				dto.setId(rs.getString("id"));
 				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
-				
 				list.add(dto);
 			}			
 		} catch (Exception e) {
@@ -75,7 +74,7 @@ public class UserDAO {
 	}
 
 	
-=======
+
 
 	public boolean join(String id, String password, String name) {
 		Connection con = null;
@@ -119,7 +118,7 @@ public class UserDAO {
 			pstmt.setString(1, password);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				if (rs.getString(1).equals(id)) {
+				if (rs.getString("id").equals(id)) {
 					flag = true;
 				}
 			}
@@ -166,5 +165,4 @@ public class UserDAO {
 		}
 		return flag;
 	}
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 }

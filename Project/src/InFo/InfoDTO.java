@@ -14,23 +14,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 public class InfoDTO {
-<<<<<<< HEAD
-   
-      private int no;
-      private int money;
-      private String content;
-      private String sort;
-      private Date day;
-      private String id;
-      
-   
-}
-=======
 
    
       private int no;
@@ -40,5 +25,5 @@ public class InfoDTO {
       private Date day;
       private String id;
       
+   
 }
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
