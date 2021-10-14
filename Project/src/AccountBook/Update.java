@@ -71,7 +71,6 @@ public class Update extends JFrame {
 				Main main = new Main();
 				main.setVisible(true);
 				frame.setVisible(false);
-				;
 				
 			}
 		});

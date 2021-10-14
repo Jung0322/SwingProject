@@ -124,6 +124,7 @@ public class login extends JFrame {
 				Boolean flag =  dao.login(textId.getText(), textPw.getText());
 				if(flag) {
 					JOptionPane.showMessageDialog(null, "로그인이 완료되었습니다.");
+					id = textId.getText();
 					Main main = new Main();
 					main.setVisible(true);
 					frame.setVisible(false);
