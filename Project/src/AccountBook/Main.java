@@ -28,9 +28,12 @@ public class Main extends JFrame implements ActionListener{
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTable table;
+
 	
 	//receive userid 
 	private String userid;
+
+	public static Main frame;
 
 // 더이상 독립적인 페이지가 아니므로 생략
 //	/**
@@ -48,6 +51,7 @@ public class Main extends JFrame implements ActionListener{
 //			}
 //		});
 //	}
+
 
 	/**
 	 * Create the frame.
@@ -91,11 +95,28 @@ public class Main extends JFrame implements ActionListener{
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Input");
-		panel_1.add(btnNewButton);
+		JButton input = new JButton("Input");
+		input.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+	
+				
+			}
+		});
+		panel_1.add(input);
 		
-		JButton btnNewButton_1 = new JButton("Edit");
-		panel_1.add(btnNewButton_1);
+		JButton edit = new JButton("Edit");
+		edit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Update update = new Update();
+				update.setVisible(true);
+				dispose();
+			}
+		});
+		panel_1.add(edit);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);

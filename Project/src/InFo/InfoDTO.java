@@ -14,6 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 
+
 public class InfoDTO {
 
    
@@ -24,4 +25,5 @@ public class InfoDTO {
       private Date day;
       private String id;
       
+   
 }
