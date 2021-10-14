@@ -26,4 +26,8 @@ public class InfoDTO {
       private String id;
       
    
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git

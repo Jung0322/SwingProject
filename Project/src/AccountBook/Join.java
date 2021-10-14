@@ -28,7 +28,7 @@ public class Join extends JFrame {
 	private JTextField name;
 	private JTextField password;
 	public UserDAO dao =  new UserDAO();
-
+	public static Join frame;
 	/**
 	 * Launch the application.
 	 */
@@ -36,7 +36,7 @@ public class Join extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Join frame = new Join();
+					frame = new Join();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -83,6 +83,8 @@ public class Join extends JFrame {
 				if(flag) {
 					System.out.println("aa");
 					JOptionPane.showMessageDialog(null, "존재하는 id가 있습니다.");
+				}else {
+					JOptionPane.showMessageDialog(null, "사용가능한 id 입니다.");
 				}
 			}
 		});
@@ -119,7 +121,11 @@ public class Join extends JFrame {
 				Boolean flag = dao.join(id.getText(), password.getText(), name.getText());
 				if(flag) {
 					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
-					
+					login login = new login();
+					login.setVisible(true);
+//					frame.setVisible(false);
+//					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "회원가입이 실패하였습니다.");
 				}

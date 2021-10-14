@@ -13,6 +13,8 @@ import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -26,6 +28,7 @@ public class Main extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTable table;
+	public static Main frame;
 
 	/**
 	 * Launch the application.
@@ -34,7 +37,7 @@ public class Main extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main frame = new Main();
+					frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -81,11 +84,28 @@ public class Main extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("Input");
-		panel_1.add(btnNewButton);
+		JButton input = new JButton("Input");
+		input.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+	
+				
+			}
+		});
+		panel_1.add(input);
 		
-		JButton btnNewButton_1 = new JButton("Edit");
-		panel_1.add(btnNewButton_1);
+		JButton edit = new JButton("Edit");
+		edit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Update update = new Update();
+				update.setVisible(true);
+				dispose();
+			}
+		});
+		panel_1.add(edit);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);

@@ -70,7 +70,7 @@ public class Update extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Main main = new Main();
 				main.setVisible(true);
-				frame.setVisible(false);
+				dispose();
 				
 			}
 		});

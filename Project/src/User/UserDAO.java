@@ -165,4 +165,8 @@ public class UserDAO {
 		}
 		return flag;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
