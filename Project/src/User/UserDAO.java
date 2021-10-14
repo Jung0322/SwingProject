@@ -75,7 +75,7 @@ public class UserDAO {
 			pstmt.setString(1, password);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				if (rs.getString(1).equals(id)) {
+				if (rs.getString("id").equals(id)) {
 					flag = true;
 				}
 			}
