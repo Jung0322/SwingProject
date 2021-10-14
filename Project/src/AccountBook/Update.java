@@ -30,8 +30,8 @@ public class Update extends JFrame {
 	private JTextField textField;
 	private JTextField textField_2;
 	private JComboBox<String> combdBox;
-	private String PayKind[] = { "½Äºñ", "±³Åë", "ÁÖ°Å/Åë½Å", "°æÁ¶»ç/È¸ºñ", "ÆĞ¼Ç/¹Ì¿ë", "±³À°", "¹®È­»ıÈ°", "±âÅ¸" };
-	private String IncomeKind[] = { "¿ù±Ş", "ºÎ¼öÀÔ", "»ó¿©", "±İÀ¶¼Òµæ", "¿ëµ·", "±âÅ¸" };
+	private String PayKind[] = { "ì‹ë¹„", "êµí†µ", "ì£¼ê±°/í†µì‹ ", "ê²½ì¡°ì‚¬/íšŒë¹„", "íŒ¨ì…˜/ë¯¸ìš©", "êµìœ¡", "ë¬¸í™”ìƒí™œ", "ê¸°íƒ€" };
+	private String IncomeKind[] = { "ì›”ê¸‰", "ë¶€ìˆ˜ì…", "ìƒì—¬", "ê¸ˆìœµì†Œë“", "ìš©ëˆ", "ê¸°íƒ€" };
 	private JPanel panel_1;
 	private static Update frame;
 
@@ -92,7 +92,7 @@ public class Update extends JFrame {
 		panel_1.setLayout(new GridLayout(3, 2, 0, 0));
 
 		JLabel lblNewLabel_1 = new JLabel("\uB0A0\uC9DC");
-		lblNewLabel_1.setFont(new Font("±¼¸²", Font.PLAIN, 20));
+		lblNewLabel_1.setFont(new Font("êµ´ë¦¼", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_1);
 
 		textField = new JTextField();
@@ -100,7 +100,7 @@ public class Update extends JFrame {
 		textField.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("\uB0B4\uC5ED");
-		lblNewLabel_2.setFont(new Font("±¼¸²", Font.PLAIN, 20));
+		lblNewLabel_2.setFont(new Font("êµ´ë¦¼", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_2);
 
 		combdBox = new JComboBox();
@@ -108,7 +108,7 @@ public class Update extends JFrame {
 		panel_1.add(combdBox);
 
 		JLabel lblNewLabel_3 = new JLabel("\uAE08\uC561");
-		lblNewLabel_3.setFont(new Font("±¼¸²", Font.PLAIN, 20));
+		lblNewLabel_3.setFont(new Font("êµ´ë¦¼", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_3);
 
 		textField_2 = new JTextField();
@@ -119,7 +119,7 @@ public class Update extends JFrame {
 		contentPane.add(panel_2, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("\uC218\uC815");
-		lblNewLabel.setFont(new Font("±¼¸²", Font.PLAIN, 25));
+		lblNewLabel.setFont(new Font("êµ´ë¦¼", Font.PLAIN, 25));
 		panel_2.add(lblNewLabel);
 
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("\uC218\uC785");
