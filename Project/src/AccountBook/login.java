@@ -18,7 +18,7 @@ public class login extends JFrame {
 	private JPanel contentPane;
 	private JTextField textPw;
 	private JTextField textId;
-
+	public static String id;
 	/**
 	 * Launch the application.
 	 */

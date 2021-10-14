@@ -22,6 +22,7 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.Font;
+import static AccountBook.login.id;
 
 public class Update extends JFrame {
 

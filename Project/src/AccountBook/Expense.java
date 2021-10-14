@@ -15,12 +15,14 @@ import java.awt.event.ItemListener;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import static AccountBook.login.id;
 
 public class Expense extends JFrame implements ItemListener{
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	
 
 
 	/**
