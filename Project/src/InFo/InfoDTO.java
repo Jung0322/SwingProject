@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Setter
 @Getter 
 @NoArgsConstructor
@@ -16,6 +15,7 @@ import lombok.ToString;
 @ToString
 
 public class InfoDTO {
+
    
       private int no;
       private int money;
@@ -24,6 +24,4 @@ public class InfoDTO {
       private Date day;
       private String id;
       
-   
 }
-
