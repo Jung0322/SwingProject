@@ -28,28 +28,35 @@ public class Main extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTable table;
+
+	
+	//receive userid 
+	private String userid;
+
 	public static Main frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new Main();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+// 더이상 독립적인 페이지가 아니므로 생략
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Main frame = new Main();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+
 
 	/**
 	 * Create the frame.
 	 */
-	public Main() {
+	public Main(String userid) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
 		contentPane = new JPanel();
@@ -59,6 +66,10 @@ public class Main extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
+		
+		JLabel lblUserId = new JLabel(userid);
+		panel.add(lblUserId);
+		
 		
 		JLabel lblNewLabel = new JLabel("Income");
 		panel.add(lblNewLabel);
@@ -90,6 +101,8 @@ public class Main extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 	
+				Input input = new Input(userid);
+				input.setVisible(true);
 				
 			}
 		});
@@ -128,7 +141,16 @@ public class Main extends JFrame {
 			}
 		));
 		scrollPane.setViewportView(table);
+		
+		
+		this.userid = userid;
 	}
 
+
+	
 }
+	
+	
+
+
 

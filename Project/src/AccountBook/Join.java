@@ -49,7 +49,7 @@ public class Join extends JFrame {
 	 * Create the frame.
 	 */
 	public Join() {
-		setTitle("È¸¿ø°¡ÀÔ");
+		setTitle("íšŒì›ê°€ì…");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 362, 191);
 		contentPane = new JPanel();
@@ -60,14 +60,14 @@ public class Join extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 
-		JLabel lblNewLabel = new JLabel("È¸¿ø°¡ÀÔÀ» È¯¿µÇÕ´Ï´Ù.");
+		JLabel lblNewLabel = new JLabel("íšŒì›ê°€ì…ì„ í™˜ì˜í•©ë‹ˆë‹¤.");
 		panel.add(lblNewLabel);
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(0, 3, 0, 0));
 
-		JLabel lblNewLabel_1 = new JLabel("ID ÀÔ·Â : ");
+		JLabel lblNewLabel_1 = new JLabel("ID ì…ë ¥ : ");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(lblNewLabel_1);
 
@@ -76,15 +76,15 @@ public class Join extends JFrame {
 		panel_1.add(id);
 		id.setColumns(10);
 
-		JButton overlop = new JButton("Áßº¹ È®ÀÎ");
+		JButton overlop = new JButton("ì¤‘ë³µ í™•ì¸");
 		overlop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean flag = dao.overlop(id.getText());
 				if(flag) {
 					System.out.println("aa");
-					JOptionPane.showMessageDialog(null, "Á¸ÀçÇÏ´Â id°¡ ÀÖ½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "ì¡´ì¬í•˜ëŠ” idê°€ ìˆìŠµë‹ˆë‹¤.");
 				}else {
-					JOptionPane.showMessageDialog(null, "»ç¿ë°¡´ÉÇÑ id ÀÔ´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "ì‚¬ìš©ê°€ëŠ¥í•œ id ì…ë‹ˆë‹¤.");
 				}
 			}
 		});
@@ -115,25 +115,25 @@ public class Join extends JFrame {
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 
-		JButton confirm = new JButton("È®ÀÎ");
+		JButton confirm = new JButton("í™•ì¸");
 		confirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean flag = dao.join(id.getText(), password.getText(), name.getText());
 				if(flag) {
-					JOptionPane.showMessageDialog(null, "È¸¿ø°¡ÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "íšŒì›ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 					login login = new login();
 					login.setVisible(true);
 //					frame.setVisible(false);
 //					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					dispose();
 				}else {
-					JOptionPane.showMessageDialog(null, "È¸¿ø°¡ÀÔÀÌ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "íšŒì›ê°€ì…ì´ ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
 				}
 			}
 		});
 		panel_2.add(confirm);
 
-		JButton cancel = new JButton("Ãë¼Ò");
+		JButton cancel = new JButton("ì·¨ì†Œ");
 		cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				id.setText("");

@@ -123,14 +123,14 @@ public class login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Boolean flag =  dao.login(textId.getText(), textPw.getText());
 				if(flag) {
-					JOptionPane.showMessageDialog(null, "·Î±×ÀÎÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "ë¡œê·¸ì¸ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 					id = textId.getText();
-					Main main = new Main();
+					Main main = new Main(id);					
 					main.setVisible(true);
 //					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					dispose();
 				}else {
-					JOptionPane.showMessageDialog(null, "·Î±×ÀÎÀÌ ½ÇÆĞÈ÷¾ú½À´Ï´Ù.");
+					JOptionPane.showMessageDialog(null, "ë¡œê·¸ì¸ì´ ì‹¤íŒ¨íˆì—ˆìŠµë‹ˆë‹¤.");
 				}
 				
 			}
