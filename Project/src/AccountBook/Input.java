@@ -43,8 +43,6 @@ public class Input extends JFrame implements ActionListener{
 	
 	//sort를 가져오기 위하여 kind 선언
 	private String kind = "지출";
-	//userid는 항상 불러와야 함
-	private String userid;
 	
 //더이상 독립적인 페이지가 아니므로 생략
 //	/**
@@ -63,7 +61,7 @@ public class Input extends JFrame implements ActionListener{
 //		});
 //	}
 
-	public Input(String userid) {
+	public Input() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -155,7 +153,6 @@ public class Input extends JFrame implements ActionListener{
 		group.add(rdbtnNewRadioButton_1);
 		
 		
-		this.userid = userid;
 	}
 
 	@Override
@@ -174,11 +171,11 @@ public class Input extends JFrame implements ActionListener{
 			System.out.println(tfMoney.getText());
 			
 			
-			boolean flag =  dao.Input(tfDate.getText(), combdBox.getSelectedItem().toString(),tfMoney.getText(), kind,userid);
+			boolean flag =  dao.Input(tfDate.getText(), combdBox.getSelectedItem().toString(),tfMoney.getText(), kind,id);
 			if(flag) {
-				Main main = new Main(userid);
+				Main main = new Main();
 				main.setVisible(true);
-				frame.setVisible(false);
+				dispose();
 				
 			}
 						

@@ -112,13 +112,13 @@ public class UserDAO {
 		boolean flag = false;
 		ResultSet rs = null;
 		try {
-			String sql = "select id from membertbl where pw = ?";
+			String sql = "select pw from membertbl where id = ?";
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, password);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				if (rs.getString("id").equals(id)) {
+				if (rs.getString("pw").equals(password)) {
 					flag = true;
 				}
 			}
