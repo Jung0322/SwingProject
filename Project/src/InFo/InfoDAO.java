@@ -8,7 +8,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 public class InfoDAO {
+	
+	List<InfoDTO> list;
 
 	static {
 		try {
@@ -31,7 +35,7 @@ public class InfoDAO {
 		return con;
 	}
 	
-	public List<InfoDTO> select() {
+	public List<InfoDTO> select(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -41,8 +45,9 @@ public class InfoDAO {
 		
 		try {
 			con = getConnection();
-			String sql = "SELECT * FROM INFO";
+			String sql = "SELECT * FROM INFO WHERE id = ?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				InfoDTO dto = new InfoDTO();
@@ -67,6 +72,7 @@ public class InfoDAO {
 		}
 		return list;
 	}
+	
 	
 	public InfoDTO search(String id) {
 		Connection con = null;

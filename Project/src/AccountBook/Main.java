@@ -15,48 +15,47 @@ import javax.swing.JTextPane;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import InFo.InfoDAO;
+import InFo.InfoDTO;
+
 public class Main extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField text_income;
+	private JTextField text_expence;
+	private JTextField text_total;
 	private JTable table;
-
-	
-	//receive userid 
-	private String userid;
-
 	public static Main frame;
+	private List<InfoDTO> list;
+	private InfoDAO dao = new InfoDAO();
 
-// 더이상 독립적인 페이지가 아니므로 생략
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Main frame = new Main();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame = new Main();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Main(String userid) {
+	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
 		contentPane = new JPanel();
@@ -67,30 +66,29 @@ public class Main extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblUserId = new JLabel(userid);
-		panel.add(lblUserId);
-		
-		
 		JLabel lblNewLabel = new JLabel("Income");
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
+		text_income = new JTextField();
+		text_income.setText(String.valueOf(income()));
+		panel.add(text_income);
+		text_income.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Expence");
 		panel.add(lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		text_expence = new JTextField();
+		text_expence.setText(String.valueOf(expence()));
+		panel.add(text_expence);
+		text_expence.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Total");
 		panel.add(lblNewLabel_2);
 		
-		textField_2 = new JTextField();
-		panel.add(textField_2);
-		textField_2.setColumns(10);
+		text_total = new JTextField();
+		text_total.setText(String.valueOf(income()-expence()));
+		panel.add(text_total);
+		text_total.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
@@ -100,9 +98,9 @@ public class Main extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-	
-				Input input = new Input(userid);
+				Input input = new Input();
 				input.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -141,16 +139,37 @@ public class Main extends JFrame {
 			}
 		));
 		scrollPane.setViewportView(table);
-		
-		
-		this.userid = userid;
 	}
 
-
+	//수입 함수
+	public int income() {
+		list = dao.select(id);
+		int  sum = 0;
+		for(int i = 0 ; i<list.size();i++) {
+			InfoDTO dto = list.get(i);
+			if(dto.getSort().equals("수입")) {
+				sum+=dto.getMoney();
+			}
+			
+		}
+		return sum;
+		
+	}
 	
+	//지출함수
+	public int expence() {
+		list = dao.select(id);
+		int  sum = 0;
+		for(int i = 0 ; i<list.size();i++) {
+			InfoDTO dto = list.get(i);
+			if(dto.getSort().equals("지출")) {
+				sum+=dto.getMoney();
+			}
+			
+		}
+		return sum;
+		
+	}
+
 }
-	
-	
-
-
 
