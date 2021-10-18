@@ -15,6 +15,11 @@ import javax.swing.JTextPane;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.attribute.AclEntry;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -31,10 +36,10 @@ public class Main extends JFrame {
 	private JTextField text_income;
 	private JTextField text_expence;
 	private JTextField text_total;
-	private JTable table;
 	public static Main frame;
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -122,25 +127,13 @@ public class Main extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"", null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Date", "Category", "Income", "Expense"
-			}
-		));
-		scrollPane.setViewportView(table);
+		contentPane.add(table, BorderLayout.WEST);
+		
+		
 	}
-
+	
+		
+	
 	//수입 함수
 	public int income() {
 		list = dao.select(id);
