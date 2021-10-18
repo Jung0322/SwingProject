@@ -119,6 +119,15 @@ public class Main extends JFrame {
 		panel_1.add(edit);
 		
 		JButton report = new JButton("statistic");
+		report.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Report report = new Report();
+				report.setVisible(true);
+				dispose();
+			}
+		});
 		panel_1.add(report);
 		
 		JScrollPane scrollPane = new JScrollPane();
