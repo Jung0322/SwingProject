@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.Vector;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -39,7 +40,10 @@ public class Main extends JFrame {
 	public static Main frame;
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
+	DefaultTableModel model;
+	JScrollPane scrollPane;
 	private JTable table;
+	JPanel panel_2; 
 
 	/**
 	 * Launch the application.
@@ -126,16 +130,68 @@ public class Main extends JFrame {
 		JButton report = new JButton("statistic");
 		panel_1.add(report);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
-		table = new JTable();
-		contentPane.add(table, BorderLayout.WEST);
+		JPanel panel_2 = new JPanel();
+		contentPane.add(panel_2, BorderLayout.CENTER);
 		
 		
+		
+			
 	}
 	
-		
+	 public void JTable() {
+		 
+		    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			setBounds(100, 100, 747, 300);
+			contentPane = new JPanel();
+			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+			contentPane.setLayout(new BorderLayout(0, 0));
+			setContentPane(contentPane);
+		 
+		    panel_2 = new JPanel();
+			contentPane.add(panel_2, BorderLayout.CENTER);	 
+	   	  
+		      
+	   	    JScrollPane scrollPane = new JScrollPane();
+	        contentPane.add(scrollPane, BorderLayout.CENTER);
+	         
+	        table = new JTable();
+	        String columnNames [] = {"No","Money","Content","Day","id"};
+	        model = new DefaultTableModel(columnNames,0) {
+	       	  
+	       	  @Override
+	       		public boolean isCellEditable (int row,int column) {
+	       		  return false;
+	       	  }
+	       					
+	         };
+	         
+	         table.setModel(model);
+	         
+	         scrollPane.setViewportView(table);
+	         
+	         dao = new InfoDAO();
+	         showTable();
+	     }
+	     
+	     private void showTable() {
+	   	  Vector<InfoDTO> vecList = dao.select(id);
+	         if(!vecList.isEmpty()) {
+	       	  for(InfoDTO dto:vecList) {
+	       		  Vector<Object> newVec = new Vector<Object>();
+	                 newVec.add(dto.getNo());
+	                 newVec.add(dto.getMoney());
+	                 newVec.add(dto.getContent());
+	                 newVec.add(dto.getDay());
+	                 
+	                 
+	                 model.addRow(newVec);
+	       	  
+	       		  
+	       	  }
+	       	  
+	        }
+	     }
+	
 	
 	//수입 함수
 	public int income() {
@@ -152,6 +208,7 @@ public class Main extends JFrame {
 		
 	}
 	
+	
 	//지출함수
 	public int expence() {
 		list = dao.select(id);
@@ -166,6 +223,7 @@ public class Main extends JFrame {
 		return sum;
 		
 	}
+	
 
 }
 

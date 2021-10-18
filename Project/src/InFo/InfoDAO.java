@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
@@ -35,7 +36,7 @@ public class InfoDAO {
 		return con;
 	}
 	
-	public List<InfoDTO> select(String id) {
+	public Vector<InfoDTO> select(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -187,6 +188,11 @@ public class InfoDAO {
 			}
 		}
 		return insertFlag;
+	}
+
+	public Vector<InfoDTO> list(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
