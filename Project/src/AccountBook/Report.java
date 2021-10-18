@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -20,6 +22,8 @@ import java.awt.Canvas;
 import java.awt.Color;
 
 import javax.swing.JProgressBar;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class Report extends JFrame {
 	private List<InfoDTO> list;
@@ -47,13 +51,31 @@ public class Report extends JFrame {
 	 */
 	public Report() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		DrawPanel drawPanel = new DrawPanel();
 		contentPane.add(drawPanel);
 		setContentPane(contentPane);
+		
+		JPanel panel = new JPanel();
+		contentPane.add(panel, BorderLayout.SOUTH);
+		
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main main = new Main();
+				main.setVisible(true);
+				dispose();
+				
+			}
+		});
+		
+		panel.add(btnNewButton);
 	}
 
 	class DrawPanel extends JPanel {
