@@ -1,6 +1,9 @@
 package AccountBook;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+
 import static AccountBook.login.id;
 import java.awt.EventQueue;
 
@@ -22,12 +25,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import InFo.InfoDAO;
 import InFo.InfoDTO;
 
-public class Main extends JFrame {
+public class Main extends JFrame  {
 
 	private JPanel contentPane;
 	private JTextField text_income;
@@ -65,53 +70,53 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
-		
+
 		JLabel lblNewLabel = new JLabel("Income");
 		panel.add(lblNewLabel);
-		
+
 		text_income = new JTextField();
 		text_income.setText(String.valueOf(income()));
 		panel.add(text_income);
 		text_income.setColumns(10);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Expence");
 		panel.add(lblNewLabel_1);
-		
+
 		text_expence = new JTextField();
 		text_expence.setText(String.valueOf(expence()));
 		panel.add(text_expence);
 		text_expence.setColumns(10);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Total");
 		panel.add(lblNewLabel_2);
-		
+
 		text_total = new JTextField();
-		text_total.setText(String.valueOf(income()-expence()));
+		text_total.setText(String.valueOf(income() - expence()));
 		panel.add(text_total);
 		text_total.setColumns(10);
-		
+
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
-		
+
 		JButton input = new JButton("Input");
 		input.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Input input = new Input();
 				input.setVisible(true);
 				dispose();
-				
+
 			}
 		});
 		panel_1.add(input);
-		
+
 		JButton edit = new JButton("Edit");
 		edit.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Update update = new Update();
@@ -120,15 +125,15 @@ public class Main extends JFrame {
 			}
 		});
 		panel_1.add(edit);
-		
+
 		JButton report = new JButton("statistic");
 		report.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(income()==0&&expence()==0) {
+				if (income() == 0 && expence() == 0) {
 					JOptionPane.showMessageDialog(null, "통계할 데이터가 없습니다.");
-				}else {
+				} else {
 					Report report = new Report();
 					report.setVisible(true);
 					dispose();
@@ -136,61 +141,64 @@ public class Main extends JFrame {
 			}
 		});
 		panel_1.add(report);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
-		
+
 		table = new JTable();
-		String columnNames [] = {"Day","Sort","Content","Money"};
-		model = new DefaultTableModel(columnNames,0) {
-            
-            @Override
-             public boolean isCellEditable (int row,int column) {
-               return false;
-            }
-                      
-         };
-         
-         table.setModel(model);
-         
-         scrollPane.setViewportView(table);
-         showTable();
-        
+		String columnNames[] = { "Day", "Sort", "Content", "Money" };
+		model = new DefaultTableModel(columnNames, 0) {
+
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+
+		};
+		DefaultTableCellRenderer renderer = new MyDefaultTableCellRenderer();
+		table.setDefaultRenderer(Object.class, renderer);
+		table.setModel(model);
+		
+
+		scrollPane.setViewportView(table);
+		showTable();
+
 	}
 
-	//수입 함수
+	// 수입 함수
 	public int income() {
 		list = dao.select(id);
-		int  sum = 0;
-		for(int i = 0 ; i<list.size();i++) {
+		int sum = 0;
+		for (int i = 0; i < list.size(); i++) {
 			InfoDTO dto = list.get(i);
-			if(dto.getSort().equals("수입")) {
-				sum+=dto.getMoney();
+			if (dto.getSort().equals("수입")) {
+				sum += dto.getMoney();
 			}
-			
+
 		}
 		return sum;
-		
+
 	}
-	
-	//지출함수
+
+	// 지출함수
 	public int expence() {
 		list = dao.select(id);
-		int  sum = 0;
-		for(int i = 0 ; i<list.size();i++) {
+		int sum = 0;
+		for (int i = 0; i < list.size(); i++) {
 			InfoDTO dto = list.get(i);
-			if(dto.getSort().equals("지출")) {
-				sum+=dto.getMoney();
+			if (dto.getSort().equals("지출")) {
+				sum += dto.getMoney();
 			}
-			
+
 		}
 		return sum;
-		
+
 	}
+
 	// select 보여주는 함수
 	public void showTable() {
-		if(!list.isEmpty()) {
-			for(InfoDTO dto : list) {
+		if (!list.isEmpty()) {
+			for (InfoDTO dto : list) {
 				Vector<Object> newVec = new Vector<Object>();
 				newVec.add(dto.getDay());
 				newVec.add(dto.getSort());
@@ -201,5 +209,22 @@ public class Main extends JFrame {
 		}
 	}
 
-}
+	public class MyDefaultTableCellRenderer extends DefaultTableCellRenderer {
 
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			for (InfoDTO dto : list) {
+				if (dto.getSort().equals("지출")) {
+					component.setBackground(Color.BLUE);
+				} else {
+					component.setBackground(Color.red);
+				}
+			}
+
+			return component;
+		}
+	}
+
+}
