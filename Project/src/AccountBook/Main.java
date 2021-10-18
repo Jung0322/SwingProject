@@ -15,6 +15,8 @@ import javax.swing.JTextPane;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Vector;
 import java.awt.GridLayout;
@@ -27,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import InFo.InfoDAO;
 import InFo.InfoDTO;
 
-public class Main extends JFrame {
+public class Main extends JFrame implements MouseListener{
 
 	private JPanel contentPane;
 	private JTextField text_income;
@@ -38,6 +40,7 @@ public class Main extends JFrame {
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
 	private DefaultTableModel model;
+	private int val;
 
 	/**
 	 * Launch the application.
@@ -63,8 +66,8 @@ public class Main extends JFrame {
 		setBounds(100, 100, 699, 449);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
@@ -96,6 +99,7 @@ public class Main extends JFrame {
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
+		
 		JButton input = new JButton("Input");
 		input.addActionListener(new ActionListener() {
 			
@@ -114,9 +118,12 @@ public class Main extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Update update = new Update();
+				String cmd = e.getActionCommand();
+				if (cmd.equals("Edit")) {
+				Update update = new Update(val);
 				update.setVisible(true);
-				dispose();
+				//dispose();
+				}
 			}
 		});
 		panel_1.add(edit);
@@ -141,7 +148,9 @@ public class Main extends JFrame {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
-		String columnNames [] = {"Day","Sort","Content","Money"};
+		table.addMouseListener(this);
+		
+		String columnNames [] = {"No","Day","Sort","Content","Money"};
 		model = new DefaultTableModel(columnNames,0) {
             
             @Override
@@ -152,6 +161,9 @@ public class Main extends JFrame {
          };
          
          table.setModel(model);
+         
+         table.getColumnModel().getColumn(0).setMinWidth(0);
+ 		 table.getColumnModel().getColumn(0).setMaxWidth(0);	
          
          scrollPane.setViewportView(table);
          showTable();
@@ -192,6 +204,7 @@ public class Main extends JFrame {
 		if(!list.isEmpty()) {
 			for(InfoDTO dto : list) {
 				Vector<Object> newVec = new Vector<Object>();
+				newVec.add(dto.getNo());
 				newVec.add(dto.getDay());
 				newVec.add(dto.getSort());
 				newVec.add(dto.getContent());
@@ -199,6 +212,37 @@ public class Main extends JFrame {
 				model.addRow(newVec);
 			}
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		JTable jTable = (JTable) e.getSource();
+		val = (int) model.getValueAt(jTable.getSelectedRow(), 0);
+	
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
