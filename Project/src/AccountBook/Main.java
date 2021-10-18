@@ -15,7 +15,9 @@ import javax.swing.JTextPane;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -35,27 +37,30 @@ public class Main extends JFrame {
 	public static Main frame;
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
+	//receive userid 
+//	private String userid;
+	private DefaultTableModel model;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new Main();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+////					frame = new Main(String id);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Main() {
+	public Main(String id) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
 		contentPane = new JPanel();
@@ -124,24 +129,55 @@ public class Main extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
+		//jtable
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"", null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Date", "Category", "Income", "Expense"
-			}
-		));
+		String columnNames[] = {"날짜","내역","수입","지출"};
+		model = new DefaultTableModel(columnNames, 0);
+		table.setModel(model);
+		
 		scrollPane.setViewportView(table);
+		
+//		list = dao.select(id);
+//		
+//		for(int i = 0 ; i<list.size();i++) {
+//			InfoDTO dto = list.get(i);
+//			dto.getDay();
+//			dto.getContent();
+//			if(dto.getSort().equals("수입")) {
+//				dto.getMoney();
+//		    }
+//		for(int i = 0 ; i<list.size();i++) {
+//			InfoDTO dto = list.get(i);
+//			if(dto.getSort().equals("수입")) {
+//				dto.getMoney();
+//			}
+private void showTable() {
+		Vector<InfoDTO> vecList = (Vector<InfoDTO>) dao.select(userid);
+		if(!vecList.isEmpty()) {
+		for(InfoDTO dto:vecList) {
+		Vector<Object> newVec = new Vector<Object>();
+		newVec.add(dto.getDay());
+		newVec.add(dto.getContent());
+		newVec.add(dto.getMoney());
+						
+		model.addRow(newVec);
+	    }
+	}
+//		//값불러오기
+//		Date date = dao.getDate();
+//		String content = dao.get();
+//		String gender = txtGender.getText();
+//		//테이블에 추가하기
+//		Object[] rowData = {,age,gender};
+//		
+//		model.addRow(rowData);
+//		
+//		txtName.setText("");
+//		txtAge.setText("");
+//		txtGender.setText("");
+//		
+//		scrollPane.setViewportView(table);
+//		this.userid = userid;
 	}
 
 	//수입 함수
