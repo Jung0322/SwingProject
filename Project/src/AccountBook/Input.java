@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
@@ -176,7 +177,8 @@ public class Input extends JFrame implements ActionListener{
 				Main main = new Main();
 				main.setVisible(true);
 				dispose();
-				
+			}else {
+				JOptionPane.showMessageDialog(null, "정보를 형식에 맞게 입력하세요.");
 			}
 						
 		}

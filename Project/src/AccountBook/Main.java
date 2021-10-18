@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Vector;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -40,10 +41,14 @@ public class Main extends JFrame {
 	public static Main frame;
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
+<<<<<<< HEAD
 	DefaultTableModel model;
 	JScrollPane scrollPane;
 	private JTable table;
 	JPanel panel_2; 
+=======
+	private DefaultTableModel model;
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 
 	/**
 	 * Launch the application.
@@ -128,14 +133,46 @@ public class Main extends JFrame {
 		panel_1.add(edit);
 		
 		JButton report = new JButton("statistic");
+		report.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(income()==0&&expence()==0) {
+					JOptionPane.showMessageDialog(null, "통계할 데이터가 없습니다.");
+				}else {
+					Report report = new Report();
+					report.setVisible(true);
+					dispose();
+				}
+			}
+		});
 		panel_1.add(report);
 		
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.CENTER);
 		
+<<<<<<< HEAD
 		
 		
 			
+=======
+		table = new JTable();
+		String columnNames [] = {"Day","Sort","Content","Money"};
+		model = new DefaultTableModel(columnNames,0) {
+            
+            @Override
+             public boolean isCellEditable (int row,int column) {
+               return false;
+            }
+                      
+         };
+         
+         table.setModel(model);
+         
+         scrollPane.setViewportView(table);
+         showTable();
+        
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 	}
 	
 	 public void JTable() {
@@ -223,7 +260,23 @@ public class Main extends JFrame {
 		return sum;
 		
 	}
+<<<<<<< HEAD
 	
+=======
+	// select 보여주는 함수
+	public void showTable() {
+		if(!list.isEmpty()) {
+			for(InfoDTO dto : list) {
+				Vector<Object> newVec = new Vector<Object>();
+				newVec.add(dto.getDay());
+				newVec.add(dto.getSort());
+				newVec.add(dto.getContent());
+				newVec.add(dto.getMoney());
+				model.addRow(newVec);
+			}
+		}
+	}
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 
 }
 
