@@ -104,7 +104,10 @@ public class Update extends JFrame implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				String cmd = e.getActionCommand();
+				if (cmd.equals("\uC0AD\uC81C")) {
+					boolean deleteRow = true;
+				}
 			}
 		});
 		panel.add(delete);
