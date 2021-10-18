@@ -123,6 +123,9 @@ public class Main extends JFrame {
 		});
 		panel_1.add(edit);
 		
+		JButton report = new JButton("statistic");
+		panel_1.add(report);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
