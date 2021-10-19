@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import InFo.InfoDAO;
 import InFo.InfoDTO;
 
-public class Main extends JFrame implements MouseListener{
+public class Main extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField text_income;
@@ -40,7 +40,7 @@ public class Main extends JFrame implements MouseListener{
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
 	private DefaultTableModel model;
-	private int val;
+	private int val = 0;
 
 	/**
 	 * Launch the application.
@@ -119,10 +119,24 @@ public class Main extends JFrame implements MouseListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String cmd = e.getActionCommand();
+	
+				try {
+					val = (int) model.getValueAt(table.getSelectedRow(), 0);
+				}
+				catch (Exception e1) {
+					e1.printStackTrace();
+				}
+					
+				
 				if (cmd.equals("Edit")) {
-				Update update = new Update(val);
-				update.setVisible(true);
-				//dispose();
+					if(val==0) {
+						JOptionPane.showMessageDialog(null, "수정할 내역을 선택해주세요.");
+					}else {
+						Update update = new Update(val);
+						update.setVisible(true);
+					}
+								
+				
 				}
 			}
 		});
@@ -148,7 +162,7 @@ public class Main extends JFrame implements MouseListener{
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
 		table = new JTable();
-		table.addMouseListener(this);
+		//table.addMouseListener(this);
 		
 		String columnNames [] = {"No","Day","Sort","Content","Money"};
 		model = new DefaultTableModel(columnNames,0) {
@@ -160,14 +174,14 @@ public class Main extends JFrame implements MouseListener{
                       
          };
          
-         table.setModel(model);
-         
-         table.getColumnModel().getColumn(0).setMinWidth(0);
- 		 table.getColumnModel().getColumn(0).setMaxWidth(0);	
+        table.setModel(model);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+	    table.getColumnModel().getColumn(0).setMaxWidth(0);	
          
          scrollPane.setViewportView(table);
          showTable();
         
+         System.out.println(table.getSelectedRow());
 	}
 
 	//수입 함수
@@ -214,36 +228,6 @@ public class Main extends JFrame implements MouseListener{
 		}
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		JTable jTable = (JTable) e.getSource();
-		val = (int) model.getValueAt(jTable.getSelectedRow(), 0);
-	
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
 
