@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Vector;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -37,8 +38,11 @@ public class Main extends JFrame {
 	public static Main frame;
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
+<<<<<<< HEAD
 	//receive userid 
 //	private String userid;
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 	private DefaultTableModel model;
 
 	/**
@@ -124,6 +128,19 @@ public class Main extends JFrame {
 		panel_1.add(edit);
 		
 		JButton report = new JButton("statistic");
+		report.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(income()==0&&expence()==0) {
+					JOptionPane.showMessageDialog(null, "통계할 데이터가 없습니다.");
+				}else {
+					Report report = new Report();
+					report.setVisible(true);
+					dispose();
+				}
+			}
+		});
 		panel_1.add(report);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -131,6 +148,7 @@ public class Main extends JFrame {
 		
 		//jtable
 		table = new JTable();
+<<<<<<< HEAD
 		String columnNames[] = {"날짜","내역","수입","지출"};
 		model = new DefaultTableModel(columnNames, 0);
 		table.setModel(model);
@@ -178,6 +196,23 @@ private void showTable() {
 //		
 //		scrollPane.setViewportView(table);
 //		this.userid = userid;
+=======
+		String columnNames [] = {"Day","Sort","Content","Money"};
+		model = new DefaultTableModel(columnNames,0) {
+            
+            @Override
+             public boolean isCellEditable (int row,int column) {
+               return false;
+            }
+                      
+         };
+         
+         table.setModel(model);
+         
+         scrollPane.setViewportView(table);
+         showTable();
+        
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 	}
 
 	//수입 함수
@@ -208,6 +243,19 @@ private void showTable() {
 		}
 		return sum;
 		
+	}
+	// select 보여주는 함수
+	public void showTable() {
+		if(!list.isEmpty()) {
+			for(InfoDTO dto : list) {
+				Vector<Object> newVec = new Vector<Object>();
+				newVec.add(dto.getDay());
+				newVec.add(dto.getSort());
+				newVec.add(dto.getContent());
+				newVec.add(dto.getMoney());
+				model.addRow(newVec);
+			}
+		}
 	}
 
 }
