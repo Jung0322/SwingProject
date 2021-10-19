@@ -51,6 +51,7 @@ public class Report extends JFrame {
 	 * Create the frame.
 	 */
 	public Report() {
+		setTitle("Report");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 350);

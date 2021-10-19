@@ -71,6 +71,7 @@ public class Update extends JFrame implements ActionListener {
 	}
 
 	public Update(int val) {
+		setTitle("Update");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 
 		dao = new InfoDAO();

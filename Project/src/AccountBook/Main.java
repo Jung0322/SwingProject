@@ -65,6 +65,7 @@ public class Main extends JFrame implements MouseListener{
     * Create the frame.
     */
    public Main() {
+   	setTitle("Main");
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setBounds(100, 100, 699, 449);
       contentPane = new JPanel();
