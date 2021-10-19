@@ -107,7 +107,7 @@ public class Update extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				String cmd = e.getActionCommand();
 				
-				if (cmd.equals("\uD655\uC778")) { //확인버튼
+				if (cmd.equals("\uC0AD\uC81C")) { //확인버튼
 					boolean deleteFlag = dao.deleteRow(val);
 					if (deleteFlag) {
 						JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
