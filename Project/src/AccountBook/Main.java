@@ -181,7 +181,7 @@ public class Main extends JFrame{
          scrollPane.setViewportView(table);
          showTable();
         
-         System.out.println(table.getSelectedRow());
+ 
 	}
 
 	//수입 함수

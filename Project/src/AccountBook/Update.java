@@ -79,18 +79,9 @@ public class Update extends JFrame {
 
 				String cmd = e.getActionCommand();
 				if (cmd.equals("확인")) {
-					
-					
-					System.out.println(kind);
-					//날짜 가져오기
-					System.out.println(dayTxt.getText());
-					//내역 가져오기
-					System.out.println(combdBox.getSelectedItem().toString());
-					//금액 가져오기
-					System.out.println(moneyTxt.getText());
-					System.out.println(val);
 
-					boolean flag = dao.update(dayTxt.getText(), combdBox.getSelectedItem().toString(), kind, moneyTxt.getText(), val);
+					boolean flag = dao.update(dayTxt.getText(), combdBox.getSelectedItem().toString(), kind,
+							moneyTxt.getText(), val);
 
 					if (flag) {
 						JOptionPane.showMessageDialog(null, "수정 완료 되었습니다.");
@@ -98,8 +89,17 @@ public class Update extends JFrame {
 						main.setVisible(true);
 						dispose();
 					}
+				} else if (cmd.equals("삭제")) {
+					boolean deleteFlag = dao.deleteRow(val);
+					if (deleteFlag) {
+						JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
+					} else {
+						JOptionPane.showMessageDialog(null, "삭제 실패.");
+					}
+					Main main = new Main();
+					main.setVisible(true);
+					dispose();
 				}
-
 			}
 		});
 		panel.add(confirm);
@@ -241,5 +241,4 @@ public class Update extends JFrame {
 		}
 
 	}
-
 }
