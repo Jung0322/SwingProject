@@ -30,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
 import InFo.InfoDAO;
 import InFo.InfoDTO;
 
-public class Main extends JFrame implements MouseListener{
+public class Main extends JFrame{
 
    private JPanel contentPane;
    private JTextField text_income;
@@ -152,7 +152,39 @@ public class Main extends JFrame implements MouseListener{
       contentPane.add(scrollPane, BorderLayout.CENTER);
       
       table = new JTable();
-      table.addMouseListener(this);
+      table.addMouseListener(new MouseListener() {
+		
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			 JTable jTable = (JTable) e.getSource();
+		     val = (int) model.getValueAt(jTable.getSelectedRow(), 0);
+			
+		}
+		
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+	});
       
       String columnNames [] = {"No","Day","Sort","Content","Money"};
       model = new DefaultTableModel(columnNames,0) {
@@ -218,35 +250,5 @@ public class Main extends JFrame implements MouseListener{
       }
    }
 
-   @Override
-   public void mouseClicked(MouseEvent e) {
-      JTable jTable = (JTable) e.getSource();
-      val = (int) model.getValueAt(jTable.getSelectedRow(), 0);
    
-   }
-
-   @Override
-   public void mousePressed(MouseEvent e) {
-      // TODO Auto-generated method stub
-      
-   }
-
-   @Override
-   public void mouseReleased(MouseEvent e) {
-      // TODO Auto-generated method stub
-      
-   }
-
-   @Override
-   public void mouseEntered(MouseEvent e) {
-      // TODO Auto-generated method stub
-      
-   }
-
-   @Override
-   public void mouseExited(MouseEvent e) {
-      // TODO Auto-generated method stub
-      
-   }
-
 }
