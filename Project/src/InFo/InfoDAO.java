@@ -83,7 +83,7 @@ public class InfoDAO {
 		try {
 			con = getConnection();
 
-			String sql = "SELECT DAY,CONTENT, MONEY FROM INFO WHERE ID=?";
+			String sql = "SELECT DAY, CONTENT, MONEY FROM INFO WHERE ID=?";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, id);
