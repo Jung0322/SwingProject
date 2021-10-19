@@ -41,14 +41,9 @@ public class Main extends JFrame {
 	public static Main frame;
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
-<<<<<<< HEAD
-	DefaultTableModel model;
-	JScrollPane scrollPane;
-	private JTable table;
-	JPanel panel_2; 
-=======
+
 	private DefaultTableModel model;
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
+
 
 	/**
 	 * Launch the application.
@@ -151,11 +146,6 @@ public class Main extends JFrame {
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.CENTER);
 		
-<<<<<<< HEAD
-		
-		
-			
-=======
 		table = new JTable();
 		String columnNames [] = {"Day","Sort","Content","Money"};
 		model = new DefaultTableModel(columnNames,0) {
@@ -171,8 +161,6 @@ public class Main extends JFrame {
          
          scrollPane.setViewportView(table);
          showTable();
-        
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 	}
 	
 	 public void JTable() {
@@ -260,9 +248,7 @@ public class Main extends JFrame {
 		return sum;
 		
 	}
-<<<<<<< HEAD
-	
-=======
+
 	// select 보여주는 함수
 	public void showTable() {
 		if(!list.isEmpty()) {
@@ -276,7 +262,6 @@ public class Main extends JFrame {
 			}
 		}
 	}
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 
 }
 
