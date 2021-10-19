@@ -71,6 +71,7 @@ public class Update extends JFrame implements ActionListener {
 	}
 
 	public Update(int val) {
+		setTitle("수정");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 
 		dao = new InfoDAO();
@@ -102,7 +103,8 @@ public class Update extends JFrame implements ActionListener {
 		panel_1.setLayout(new GridLayout(3, 2, 0, 0));
 
 		JLabel lblNewLabel_1 = new JLabel("\uB0A0\uC9DC");
-		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_1);
 
 		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -114,7 +116,8 @@ public class Update extends JFrame implements ActionListener {
 		dayTxt.setText(today);
 
 		JLabel lblNewLabel_2 = new JLabel("\uB0B4\uC5ED");
-		lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_2);
 
 		combdBox = new JComboBox();
@@ -122,7 +125,8 @@ public class Update extends JFrame implements ActionListener {
 		panel_1.add(combdBox);
 
 		JLabel lblNewLabel_3 = new JLabel("\uAE08\uC561");
-		lblNewLabel_3.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_3);
 
 		String strMoney = String.valueOf(dto.getMoney());
@@ -136,7 +140,7 @@ public class Update extends JFrame implements ActionListener {
 		contentPane.add(panel_2, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("\uC218\uC815");
-		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 25));
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 25));
 		panel_2.add(lblNewLabel);
 
 		rdbtnIncom = new JRadioButton("\uC218\uC785");
