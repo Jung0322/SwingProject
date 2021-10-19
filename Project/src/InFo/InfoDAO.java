@@ -35,13 +35,8 @@ public class InfoDAO {
 		}
 		return con;
 	}
-<<<<<<< HEAD
-	
-	public Vector<InfoDTO> select(String id) {
-=======
 
 	public List<InfoDTO> select(String id) {
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -227,13 +222,6 @@ public class InfoDAO {
 		return insertFlag;
 	}
 
-<<<<<<< HEAD
-	public Vector<InfoDTO> list(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-=======
 	public Vector<InfoDTO> select() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -272,9 +260,6 @@ public class InfoDAO {
 		}
 		return vetList;
 	}
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
-=======
 	
 	public boolean deleteRow(int no) {
 		Connection con=null;
@@ -304,5 +289,4 @@ public class InfoDAO {
 		return deleteFlag;
 	}
 	
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 }
