@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 
 import InFo.InfoDAO;
 import InFo.InfoDTO;
+import java.awt.Toolkit;
 
 public class Main extends JFrame implements MouseListener{
 
@@ -62,6 +63,7 @@ public class Main extends JFrame implements MouseListener{
 	 * Create the frame.
 	 */
 	public Main() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
 		contentPane = new JPanel();
@@ -200,7 +202,9 @@ public class Main extends JFrame implements MouseListener{
 		
 	}
 	// select 보여주는 함수
-	public void showTable() {
+	public void showTable() {		
+		
+		
 		if(!list.isEmpty()) {
 			for(InfoDTO dto : list) {
 				Vector<Object> newVec = new Vector<Object>();
