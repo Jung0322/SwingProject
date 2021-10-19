@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 public class login extends JFrame {
 
@@ -48,6 +49,7 @@ public class login extends JFrame {
 	 * Create the frame.
 	 */
 	public login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -133,7 +135,8 @@ public class login extends JFrame {
 					JOptionPane.showMessageDialog(null, "로그인이 실패히었습니다.");
 				}
 				
-			}
+
+}
 		});
 		panel_2.add(btnLogin);
 		

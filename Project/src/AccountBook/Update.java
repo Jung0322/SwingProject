@@ -36,6 +36,7 @@ import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.Font;
 import static AccountBook.login.id;
+import java.awt.Toolkit;
 
 public class Update extends JFrame implements ActionListener {
 
@@ -70,6 +71,7 @@ public class Update extends JFrame implements ActionListener {
 	}
 
 	public Update(int val) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 
 		dao = new InfoDAO();
 		dto = new InfoDTO();
