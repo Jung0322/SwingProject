@@ -6,14 +6,26 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl;
+
+import InFo.InfoDAO;
+import InFo.InfoDTO;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.security.auth.callback.ConfirmationCallback;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -24,25 +36,30 @@ import javax.swing.JRadioButton;
 import java.awt.Font;
 import static AccountBook.login.id;
 
-public class Update extends JFrame {
+public class Update extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_2;
+	private JTextField dayTxt, moneyTxt;
 	private JComboBox<String> combdBox;
 	private String PayKind[] = { "식비", "교통", "주거/통신", "경조사/회비", "패션/미용", "교육", "문화생활", "기타" };
 	private String IncomeKind[] = { "월급", "부수입", "상여", "금융소득", "용돈", "기타" };
 	private JPanel panel_1;
 	private static Update frame;
+	private static int val;
+	public InfoDAO dao;
+	public InfoDTO dto;
+	private JRadioButton rdbtnExpense,rdbtnIncom;
 
 	/**
 	 * Launch the application.
 	 */
+
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Update();
+					frame = new Update(val);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +68,12 @@ public class Update extends JFrame {
 		});
 	}
 
-	public Update() {
+	public Update(int val) {
+
+		dao = new InfoDAO();
+		dto = new InfoDTO();
+		dto = dao.noSelect(val);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -65,13 +87,13 @@ public class Update extends JFrame {
 		JButton confirm = new JButton("\uD655\uC778");
 		confirm.setHorizontalAlignment(SwingConstants.RIGHT);
 		confirm.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Main main = new Main();
 				main.setVisible(true);
 				dispose();
-				
+
 			}
 		});
 		panel.add(confirm);
@@ -82,7 +104,10 @@ public class Update extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				String cmd = e.getActionCommand();
+				if (cmd.equals("\uC0AD\uC81C")) {
+					boolean deleteRow = true;
+				}
 			}
 		});
 		panel.add(delete);
@@ -95,9 +120,13 @@ public class Update extends JFrame {
 		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_1);
 
-		textField = new JTextField();
-		panel_1.add(textField);
-		textField.setColumns(10);
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdFormat.format(dto.getDay());
+
+		dayTxt = new JTextField();
+		panel_1.add(dayTxt);
+		dayTxt.setColumns(10);
+		dayTxt.setText(today);
 
 		JLabel lblNewLabel_2 = new JLabel("\uB0B4\uC5ED");
 		lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 20));
@@ -111,9 +140,12 @@ public class Update extends JFrame {
 		lblNewLabel_3.setFont(new Font("굴림", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_3);
 
-		textField_2 = new JTextField();
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
+		String strMoney = String.valueOf(dto.getMoney());
+
+		moneyTxt = new JTextField();
+		panel_1.add(moneyTxt);
+		moneyTxt.setColumns(10);
+		moneyTxt.setText(strMoney);
 
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.NORTH);
@@ -122,8 +154,9 @@ public class Update extends JFrame {
 		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 25));
 		panel_2.add(lblNewLabel);
 
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("\uC218\uC785");
-		rdbtnNewRadioButton.addItemListener(new ItemListener() {
+		rdbtnIncom = new JRadioButton("\uC218\uC785");
+		
+		rdbtnIncom.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
@@ -131,23 +164,120 @@ public class Update extends JFrame {
 
 			}
 		});
-		panel_2.add(rdbtnNewRadioButton);
-
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("\uC9C0\uCD9C");
-		rdbtnNewRadioButton_1.addItemListener(new ItemListener() {
+		panel_2.add(rdbtnIncom);
+		rdbtnExpense = new JRadioButton("\uC9C0\uCD9C");
+		rdbtnExpense.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				combdBox.setModel(new DefaultComboBoxModel(PayKind));
-
 			}
 		});
-		rdbtnNewRadioButton_1.setSelected(true);
-		panel_2.add(rdbtnNewRadioButton_1);
+		rdbtnExpense.setSelected(true);
+		panel_2.add(rdbtnExpense);
 
 		ButtonGroup group = new ButtonGroup();
-		group.add(rdbtnNewRadioButton);
-		group.add(rdbtnNewRadioButton_1);
+		group.add(rdbtnIncom);
+		group.add(rdbtnExpense);
+
+		// sort값이 0이면 수입에 체크, 반대면 지출에 체크
+		if (dto.getSort().equals("0")) {
+			rdbtnIncom.setSelected(true);
+
+			switch (dto.getContent()) {
+			case "월급":
+				combdBox.setSelectedIndex(0);
+				break;
+			case "부수입":
+				combdBox.setSelectedIndex(1);
+				break;
+			case "상여":
+				combdBox.setSelectedIndex(2);
+				break;
+			case "금융소득":
+				combdBox.setSelectedIndex(3);
+				break;
+			case "용돈":
+				combdBox.setSelectedIndex(4);
+				break;
+			case "기타":
+				combdBox.setSelectedIndex(5);
+				break;
+
+			}
+
+		} else {
+			rdbtnExpense.setSelected(true);
+
+			switch (dto.getContent()) {
+			case "식비":
+				combdBox.setSelectedIndex(0);
+				break;
+			case "교통":
+				combdBox.setSelectedIndex(1);
+				break;
+			case "주거/통신":
+				combdBox.setSelectedIndex(2);
+				break;
+			case "경조사/회비":
+				combdBox.setSelectedIndex(3);
+				break;
+			case "패션/미용":
+				combdBox.setSelectedIndex(4);
+				break;
+			case "교육":
+				combdBox.setSelectedIndex(5);
+				break;
+			case "문화생활":
+				combdBox.setSelectedIndex(6);
+				break;
+			case "기타":
+				combdBox.setSelectedIndex(7);
+				break;
+			}
+
+		}
 	}
 
+
+
+	public void actionPerformed(ActionEvent e) {
+	
+		
+		
+		String cmd = e.getActionCommand();
+		if (cmd.equals("확인")) {}
+//			Boolean flag = dao.update(dayTxt, content, sort, moneyTxt, val, id);
+					
+					
+//			if(flag) {
+//				JOptionPane.showMessageDialog(null, "수정 완료 되었습니다.");
+//				
+//				
+//				
+////				login login = new login();
+////				login.setVisible(true);
+////				dispose();
+		
+	
+
+	
+		}
 }
+
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+

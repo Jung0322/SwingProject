@@ -25,7 +25,7 @@ public class InfoDAO {
 
 	public static Connection getConnection() {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "c##javaUser";
+		String user = "c##java";
 		String password = "12345";
 		Connection con = null;
 		try {
@@ -260,4 +260,33 @@ public class InfoDAO {
 		}
 		return vetList;
 	}
+	
+	public boolean deleteRow(int no) {
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		boolean deleteFlag = false;
+		
+		try {
+			con = getConnection();
+			String sql = "delete from info where no = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			
+			int	result = pstmt.executeUpdate();
+			if (result>0) {
+				deleteFlag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				con.close();
+				pstmt.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return deleteFlag;
+	}
+	
 }
