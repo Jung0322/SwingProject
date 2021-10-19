@@ -38,7 +38,7 @@ import java.awt.Font;
 import static AccountBook.login.id;
 import java.awt.Toolkit;
 
-public class Update extends JFrame implements ActionListener {
+public class Update extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField dayTxt, moneyTxt;
@@ -56,19 +56,19 @@ public class Update extends JFrame implements ActionListener {
 	 * Launch the application.
 	 */
 
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					frame = new Update(val);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					frame = new Update(val);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	public Update(int val) {
 		setTitle("Update");
@@ -90,12 +90,37 @@ public class Update extends JFrame implements ActionListener {
 
 		JButton confirm = new JButton("\uD655\uC778");
 		confirm.setHorizontalAlignment(SwingConstants.RIGHT);
-		confirm.addActionListener(this);
+		confirm.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		panel.add(confirm);
 
 		JButton delete = new JButton("\uC0AD\uC81C");
 		delete.setHorizontalAlignment(SwingConstants.RIGHT);
-		delete.addActionListener(this); 
+		delete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String cmd = e.getActionCommand();
+				
+				if (cmd.equals("\uD655\uC778")) { //확인버튼
+					boolean deleteFlag = dao.deleteRow(val);
+					if (deleteFlag) {
+						JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
+					}else {
+						JOptionPane.showMessageDialog(null, "삭제 실패.");
+					}
+					Main main = new Main();
+					main.setVisible(true);
+					dispose();
+			}
+		}
+		});
 		panel.add(delete);
 
 		panel_1 = new JPanel();
@@ -237,30 +262,5 @@ public class Update extends JFrame implements ActionListener {
 ////				login.setVisible(true);
 ////				dispose();
 
-	@Override
-		public void actionPerformed(ActionEvent e) {
-			String cmd = e.getActionCommand();
-			dao = new InfoDAO();
-			if (cmd.equals("\uD655\uC778")) { //확인버튼
-				//update sql 구문 
-				
-				
-				Main main = new Main();
-				main.setVisible(true);
-				dispose();	
-			}else if(cmd.equals("\uC0AD\uC81C")) { //삭제버튼
-				//Boolean deleteFlag =  dao.deleteRow(Arrays.asList(val).indexOf("No"));
-				//boolean deleteRow(int no)
-				dao.deleteRow(val);
-				JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
-				Main main = new Main();
-				main.setVisible(true);
-				dispose();
-				
-			}
-		}
-
-
-
-
+	
 }
