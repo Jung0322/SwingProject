@@ -20,6 +20,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
@@ -48,7 +49,7 @@ public class Update extends JFrame implements ActionListener {
 	private static int val;
 	public InfoDAO dao;
 	public InfoDTO dto;
-	private JRadioButton rdbtnExpense,rdbtnIncom;
+	private JRadioButton rdbtnExpense, rdbtnIncom;
 
 	/**
 	 * Launch the application.
@@ -86,30 +87,12 @@ public class Update extends JFrame implements ActionListener {
 
 		JButton confirm = new JButton("\uD655\uC778");
 		confirm.setHorizontalAlignment(SwingConstants.RIGHT);
-		confirm.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Main main = new Main();
-				main.setVisible(true);
-				dispose();
-
-			}
-		});
+		confirm.addActionListener(this);
 		panel.add(confirm);
 
 		JButton delete = new JButton("\uC0AD\uC81C");
 		delete.setHorizontalAlignment(SwingConstants.RIGHT);
-		delete.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String cmd = e.getActionCommand();
-				if (cmd.equals("\uC0AD\uC81C")) {
-					boolean deleteRow = true;
-				}
-			}
-		});
+		delete.addActionListener(this); 
 		panel.add(delete);
 
 		panel_1 = new JPanel();
@@ -155,7 +138,7 @@ public class Update extends JFrame implements ActionListener {
 		panel_2.add(lblNewLabel);
 
 		rdbtnIncom = new JRadioButton("\uC218\uC785");
-		
+
 		rdbtnIncom.addItemListener(new ItemListener() {
 
 			@Override
@@ -181,7 +164,7 @@ public class Update extends JFrame implements ActionListener {
 		group.add(rdbtnExpense);
 
 		// sort값이 0이면 수입에 체크, 반대면 지출에 체크
-		if (dto.getSort().equals("0")) {
+		if (dto.getSort().equals("수입")){ 
 			rdbtnIncom.setSelected(true);
 
 			switch (dto.getContent()) {
@@ -203,10 +186,8 @@ public class Update extends JFrame implements ActionListener {
 			case "기타":
 				combdBox.setSelectedIndex(5);
 				break;
-
 			}
-
-		} else {
+		} else if (dto.getSort().equals("지출")) {
 			rdbtnExpense.setSelected(true);
 
 			switch (dto.getContent()) {
@@ -235,21 +216,15 @@ public class Update extends JFrame implements ActionListener {
 				combdBox.setSelectedIndex(7);
 				break;
 			}
-
 		}
 	}
 
+//
+//	public void actionPerformed(ActionEvent e) {
+//		String cmd = e.getActionCommand();
+//		if (cmd.equals("확인")) {}
+////			Boolean flag = dao.update(dayTxt, content, sort, moneyTxt, val, id);
 
-
-	public void actionPerformed(ActionEvent e) {
-	
-		
-		
-		String cmd = e.getActionCommand();
-		if (cmd.equals("확인")) {}
-//			Boolean flag = dao.update(dayTxt, content, sort, moneyTxt, val, id);
-					
-					
 //			if(flag) {
 //				JOptionPane.showMessageDialog(null, "수정 완료 되었습니다.");
 //				
@@ -258,26 +233,31 @@ public class Update extends JFrame implements ActionListener {
 ////				login login = new login();
 ////				login.setVisible(true);
 ////				dispose();
-		
-	
 
-	
+	@Override
+		public void actionPerformed(ActionEvent e) {
+			String cmd = e.getActionCommand();
+			dao = new InfoDAO();
+			if (cmd.equals("\uD655\uC778")) { //확인버튼
+				//update sql 구문 
+				
+				
+				Main main = new Main();
+				main.setVisible(true);
+				dispose();	
+			}else if(cmd.equals("\uC0AD\uC81C")) { //삭제버튼
+				//Boolean deleteFlag =  dao.deleteRow(Arrays.asList(val).indexOf("No"));
+				//boolean deleteRow(int no)
+				dao.deleteRow(val);
+				JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
+				Main main = new Main();
+				main.setVisible(true);
+				dispose();
+				
+			}
 		}
+
+
+
+
 }
-
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
