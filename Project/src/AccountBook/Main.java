@@ -15,12 +15,8 @@ import javax.swing.JTextPane;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
-import java.util.Date;
-=======
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 import java.util.List;
 import java.util.Vector;
 import java.awt.GridLayout;
@@ -43,11 +39,6 @@ public class Main extends JFrame implements MouseListener{
 	public static Main frame;
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
-<<<<<<< HEAD
-	//receive userid 
-//	private String userid;
-=======
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 	private DefaultTableModel model;
 	private int val;
 
@@ -158,8 +149,6 @@ public class Main extends JFrame implements MouseListener{
 		
 		//jtable
 		table = new JTable();
-<<<<<<< HEAD
-<<<<<<< HEAD
 		String columnNames[] = {"날짜","내역","수입","지출"};
 		model = new DefaultTableModel(columnNames, 0);
 		table.setModel(model);
@@ -207,13 +196,11 @@ private void showTable() {
 //		
 //		scrollPane.setViewportView(table);
 //		this.userid = userid;
-=======
-		String columnNames [] = {"Day","Sort","Content","Money"};
-=======
+
 		table.addMouseListener(this);
 		
 		String columnNames [] = {"No","Day","Sort","Content","Money"};
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
+
 		model = new DefaultTableModel(columnNames,0) {
             
             @Override
@@ -231,8 +218,7 @@ private void showTable() {
          scrollPane.setViewportView(table);
          showTable();
         
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
-	}
+
 
 	//수입 함수
 	public int income() {
