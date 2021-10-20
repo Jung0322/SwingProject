@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl;
+//import com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl;
 
 import InFo.InfoDAO;
 import InFo.InfoDTO;
@@ -18,9 +18,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
@@ -36,9 +38,8 @@ import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.Font;
 import static AccountBook.login.id;
-import java.awt.Toolkit;
 
-public class Update extends JFrame{
+public class Update extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField dayTxt, moneyTxt;
@@ -47,32 +48,18 @@ public class Update extends JFrame{
 	private String IncomeKind[] = { "월급", "부수입", "상여", "금융소득", "용돈", "기타" };
 	private JPanel panel_1;
 	private static Update frame;
-	private static int val;
+	private int val;
 	public InfoDAO dao;
 	public InfoDTO dto;
 	private JRadioButton rdbtnExpense, rdbtnIncom;
-
-	/**
-	 * Launch the application.
-	 */
-
-//	public static void main(String[] args) {
-//
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					frame = new Update(val);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
+	private String kind = "지출";
 
 	public Update(int val) {
+<<<<<<< HEAD
 		setTitle("Update");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 
 		dao = new InfoDAO();
 		dto = new InfoDTO();
@@ -91,11 +78,23 @@ public class Update extends JFrame{
 		JButton confirm = new JButton("\uD655\uC778");
 		confirm.setHorizontalAlignment(SwingConstants.RIGHT);
 		confirm.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+
+				String cmd = e.getActionCommand();
+				if (cmd.equals("확인")) {
+
+					boolean flag = dao.update(dayTxt.getText(), combdBox.getSelectedItem().toString(), kind,
+							moneyTxt.getText(), val);
+
+					if (flag) {
+						JOptionPane.showMessageDialog(null, "수정 완료 되었습니다.");
+						Main main = new Main();
+						main.setVisible(true);
+						dispose();
+					}
+				}
 			}
 		});
 		panel.add(confirm);
@@ -103,23 +102,22 @@ public class Update extends JFrame{
 		JButton delete = new JButton("\uC0AD\uC81C");
 		delete.setHorizontalAlignment(SwingConstants.RIGHT);
 		delete.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String cmd = e.getActionCommand();
-				
-				if (cmd.equals("\uD655\uC778")) { //확인버튼
+				if (cmd.equals("삭제")) {
 					boolean deleteFlag = dao.deleteRow(val);
 					if (deleteFlag) {
 						JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
-					}else {
+					} else {
 						JOptionPane.showMessageDialog(null, "삭제 실패.");
 					}
 					Main main = new Main();
 					main.setVisible(true);
 					dispose();
+				}
 			}
-		}
 		});
 		panel.add(delete);
 
@@ -191,8 +189,7 @@ public class Update extends JFrame{
 		group.add(rdbtnIncom);
 		group.add(rdbtnExpense);
 
-		// sort값이 0이면 수입에 체크, 반대면 지출에 체크
-		if (dto.getSort().equals("수입")){ 
+		if (dto.getSort().equals("수입")) {
 			rdbtnIncom.setSelected(true);
 
 			switch (dto.getContent()) {
@@ -214,8 +211,10 @@ public class Update extends JFrame{
 			case "기타":
 				combdBox.setSelectedIndex(5);
 				break;
+
 			}
-		} else if (dto.getSort().equals("지출")) {
+
+		} else {
 			rdbtnExpense.setSelected(true);
 
 			switch (dto.getContent()) {
@@ -244,23 +243,8 @@ public class Update extends JFrame{
 				combdBox.setSelectedIndex(7);
 				break;
 			}
+
 		}
+
 	}
-
-//
-//	public void actionPerformed(ActionEvent e) {
-//		String cmd = e.getActionCommand();
-//		if (cmd.equals("확인")) {}
-////			Boolean flag = dao.update(dayTxt, content, sort, moneyTxt, val, id);
-
-//			if(flag) {
-//				JOptionPane.showMessageDialog(null, "수정 완료 되었습니다.");
-//				
-//				
-//				
-////				login login = new login();
-////				login.setVisible(true);
-////				dispose();
-
-	
 }

@@ -20,7 +20,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
-import java.awt.Toolkit;
 
 public class Join extends JFrame {
 
@@ -50,7 +49,6 @@ public class Join extends JFrame {
 	 * Create the frame.
 	 */
 	public Join() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 362, 191);

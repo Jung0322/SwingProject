@@ -29,7 +29,6 @@ import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.Font;
 import static AccountBook.login.id;
-import java.awt.Toolkit;
 
 public class Input extends JFrame implements ActionListener{
 
@@ -64,8 +63,11 @@ public class Input extends JFrame implements ActionListener{
 //	}
 
 	public Input() {
+<<<<<<< HEAD
 		setTitle("Input");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
