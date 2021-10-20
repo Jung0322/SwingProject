@@ -17,6 +17,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
@@ -63,11 +65,7 @@ public class Input extends JFrame implements ActionListener{
 //	}
 
 	public Input() {
-<<<<<<< HEAD
-		setTitle("Input");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
-=======
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -83,7 +81,7 @@ public class Input extends JFrame implements ActionListener{
 		confirm.addActionListener(this);
 		panel.add(confirm);
 
-		JButton delete = new JButton("\uC0AD\uC81C");
+		JButton delete = new JButton("취소");
 		delete.setHorizontalAlignment(SwingConstants.RIGHT);
 		delete.addActionListener(new ActionListener() {
 
@@ -99,7 +97,8 @@ public class Input extends JFrame implements ActionListener{
 		panel_1.setLayout(new GridLayout(3, 2, 0, 0));
 
 		JLabel lblNewLabel_1 = new JLabel("\uB0A0\uC9DC");
-		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_1);
 
 		tfDate = new JTextField();
@@ -107,7 +106,8 @@ public class Input extends JFrame implements ActionListener{
 		tfDate.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("\uB0B4\uC5ED");
-		lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_2);
 
 		comboBox = new JComboBox();
@@ -115,7 +115,8 @@ public class Input extends JFrame implements ActionListener{
 		panel_1.add(comboBox);
 
 		JLabel lblNewLabel_3 = new JLabel("\uAE08\uC561");
-		lblNewLabel_3.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_3);
 
 		tfMoney = new JTextField();
@@ -126,7 +127,8 @@ public class Input extends JFrame implements ActionListener{
 		contentPane.add(panel_2, BorderLayout.NORTH);
 
 		JLabel lblNewLabel = new JLabel("\uC785\uB825");
-		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 25));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 25));
 		panel_2.add(lblNewLabel);
 
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("\uC218\uC785");

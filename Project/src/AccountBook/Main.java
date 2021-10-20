@@ -22,6 +22,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Vector;
 import java.awt.GridLayout;
@@ -46,8 +47,10 @@ public class Main extends JFrame{
 	private InfoDAO dao = new InfoDAO();
 	private DefaultTableModel model;
 	private int val = 0;
+	private DecimalFormat formatter = new DecimalFormat("###,###");
 	private String kind[] = { "수입", "지출" };
 	private JComboBox<String> comboBox;
+
 
 	/**
 	 * Launch the application.
@@ -69,12 +72,14 @@ public class Main extends JFrame{
 	 * Create the frame.
 	 */
 	public Main() {
+		setTitle("내 가계부");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
@@ -83,7 +88,7 @@ public class Main extends JFrame{
 		panel.add(lblNewLabel);
 		
 		text_income = new JTextField();
-		text_income.setText(String.valueOf(income()));
+	    text_income.setText(formatter.format(income()));
 		panel.add(text_income);
 		text_income.setColumns(10);
 		
@@ -91,7 +96,7 @@ public class Main extends JFrame{
 		panel.add(lblNewLabel_1);
 		
 		text_expence = new JTextField();
-		text_expence.setText(String.valueOf(expence()));
+		text_expence.setText(formatter.format(expence()));
 		panel.add(text_expence);
 		text_expence.setColumns(10);
 		
@@ -99,7 +104,7 @@ public class Main extends JFrame{
 		panel.add(lblNewLabel_2);
 		
 		text_total = new JTextField();
-		text_total.setText(String.valueOf(income()-expence()));
+		text_total.setText(formatter.format(income()-expence()));
 		panel.add(text_total);
 		text_total.setColumns(10);
 		
