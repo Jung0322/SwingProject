@@ -34,7 +34,10 @@ import javax.swing.table.DefaultTableModel;
 
 import InFo.InfoDAO;
 import InFo.InfoDTO;
+<<<<<<< HEAD
 import javax.swing.ImageIcon;
+=======
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 import java.awt.Toolkit;
 
 public class Main extends JFrame{
@@ -74,7 +77,11 @@ public class Main extends JFrame{
 	 * Create the frame.
 	 */
 	public Main() {
+<<<<<<< HEAD
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
+=======
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/AccountBook/pigbank.png")));
+>>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 		setTitle("내 가계부");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
@@ -258,7 +265,7 @@ public class Main extends JFrame{
 					newVec.add(dto.getDay());
 					newVec.add(dto.getSort());
 					newVec.add(dto.getContent());
-					newVec.add(dto.getMoney());
+					newVec.add(formatter.format(dto.getMoney()));
 					model.addRow(newVec);
 				}
 			}
@@ -275,7 +282,7 @@ public class Main extends JFrame{
 					newVec.add(dto.getDay());
 					newVec.add(dto.getSort());
 					newVec.add(dto.getContent());
-					newVec.add(dto.getMoney());
+					newVec.add(formatter.format(dto.getMoney()));
 					model.addRow(newVec);
 				}
 			}
