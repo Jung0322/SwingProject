@@ -254,7 +254,7 @@ public class Main extends JFrame{
 					newVec.add(dto.getDay());
 					newVec.add(dto.getSort());
 					newVec.add(dto.getContent());
-					newVec.add(dto.getMoney());
+					newVec.add(formatter.format(dto.getMoney()));
 					model.addRow(newVec);
 				}
 			}
@@ -271,7 +271,7 @@ public class Main extends JFrame{
 					newVec.add(dto.getDay());
 					newVec.add(dto.getSort());
 					newVec.add(dto.getContent());
-					newVec.add(dto.getMoney());
+					newVec.add(formatter.format(dto.getMoney()));
 					model.addRow(newVec);
 				}
 			}
