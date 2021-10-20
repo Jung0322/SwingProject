@@ -33,7 +33,7 @@ import java.awt.Toolkit;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
-public class Input extends JFrame implements ActionListener{
+public class Input extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField tfDate;
@@ -44,10 +44,10 @@ public class Input extends JFrame implements ActionListener{
 	private JPanel panel_1;
 	private static Input frame;
 	public InfoDAO dao = new InfoDAO();
-	
-	//sort를 가져오기 위하여 kind 선언
+
+	// sort를 가져오기 위하여 kind 선언
 	private String kind = "지출";
-	
+
 //더이상 독립적인 페이지가 아니므로 생략
 //	/**
 //	 * Launch the application.
@@ -66,7 +66,8 @@ public class Input extends JFrame implements ActionListener{
 //	}
 
 	public Input() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
+		setIconImage(Toolkit.getDefaultToolkit()
+				.getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -79,6 +80,7 @@ public class Input extends JFrame implements ActionListener{
 		contentPane.add(panel, BorderLayout.SOUTH);
 
 		JButton confirm = new JButton("\uD655\uC778");
+		confirm.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
 		confirm.setForeground(new Color(255, 255, 255));
 		confirm.setBackground(Color.BLACK);
 		confirm.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -86,6 +88,7 @@ public class Input extends JFrame implements ActionListener{
 		panel.add(confirm);
 
 		JButton delete = new JButton("\uC0AD\uC81C");
+		delete.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
 		delete.setForeground(new Color(255, 255, 255));
 		delete.setBackground(Color.BLACK);
 		delete.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -106,28 +109,31 @@ public class Input extends JFrame implements ActionListener{
 		JLabel lblNewLabel_1 = new JLabel("\uB0A0\uC9DC");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBackground(new Color(255, 255, 255));
-		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_1.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_1);
 
 		tfDate = new JTextField();
+		tfDate.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
 		panel_1.add(tfDate);
 		tfDate.setColumns(10);
 
 		JLabel lblNewLabel_2 = new JLabel("\uB0B4\uC5ED");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_2.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_2);
 
 		combdBox = new JComboBox();
+		combdBox.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
 		combdBox.setModel(new DefaultComboBoxModel(PayKind));
 		panel_1.add(combdBox);
 
 		JLabel lblNewLabel_3 = new JLabel("\uAE08\uC561");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setFont(new Font("굴림", Font.PLAIN, 20));
+		lblNewLabel_3.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_3);
 
 		tfMoney = new JTextField();
+		tfMoney.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
 		panel_1.add(tfMoney);
 		tfMoney.setColumns(10);
 
@@ -137,10 +143,11 @@ public class Input extends JFrame implements ActionListener{
 
 		JLabel lblNewLabel = new JLabel(" 입력");
 		lblNewLabel.setIcon(new ImageIcon(Input.class.getResource("/AccountBook/edit (2).png")));
-		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 25));
+		lblNewLabel.setFont(new Font("IM혜민 Bold", Font.PLAIN, 25));
 		panel_2.add(lblNewLabel);
 
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("\uC218\uC785");
+		rdbtnNewRadioButton.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
 		rdbtnNewRadioButton.setBackground(new Color(255, 255, 255));
 		rdbtnNewRadioButton.addItemListener(new ItemListener() {
 
@@ -148,20 +155,20 @@ public class Input extends JFrame implements ActionListener{
 			public void itemStateChanged(ItemEvent e) {
 				combdBox.setModel(new DefaultComboBoxModel(IncomeKind));
 				kind = "수입";
-				
 
 			}
 		});
 		panel_2.add(rdbtnNewRadioButton);
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("\uC9C0\uCD9C");
+		rdbtnNewRadioButton_1.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
 		rdbtnNewRadioButton_1.setBackground(new Color(255, 255, 255));
 		rdbtnNewRadioButton_1.addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				combdBox.setModel(new DefaultComboBoxModel(PayKind));
-				kind="지출";
+				kind = "지출";
 			}
 		});
 		rdbtnNewRadioButton_1.setSelected(true);
@@ -170,37 +177,36 @@ public class Input extends JFrame implements ActionListener{
 		ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnNewRadioButton);
 		group.add(rdbtnNewRadioButton_1);
-		
-		
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		
-		if(cmd.equals("확인")) {
-//			//사용자 입력값 가져오기
-//			//라디오 버튼 선택된 값 가져오기
+
+		if (cmd.equals("확인")) {
+//			// 사용자 입력값 가져오기
+//			// 라디오 버튼 선택된 값 가져오기
 //			System.out.println(kind);
-//			//날짜 가져오기
+//			// 날짜 가져오기
 //			System.out.println(tfDate.getText());
-//			//내역 가져오기
+//			// 내역 가져오기
 //			System.out.println(combdBox.getSelectedItem().toString());
-//			//금액 가져오기
+//			// 금액 가져오기
 //			System.out.println(tfMoney.getText());
-			
-			
-			boolean flag =  dao.Input(tfDate.getText(), combdBox.getSelectedItem().toString(),tfMoney.getText(), kind,id);
-			if(flag) {
+
+			boolean flag = dao.Input(tfDate.getText(), combdBox.getSelectedItem().toString(), tfMoney.getText(), kind,
+					id);
+			if (flag) {
 				Main main = new Main();
 				main.setVisible(true);
 				dispose();
-			}else {
+			} else {
 				JOptionPane.showMessageDialog(null, "정보를 형식에 맞게 입력하세요.");
 			}
-						
+
 		}
-		
+
 	}
 
 }
