@@ -48,6 +48,7 @@ public class Update extends JFrame {
 	private JRadioButton rdbtnExpense, rdbtnIncom;
 	private String kind = "지출";
 	public Update(int val) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 
 		dao = new InfoDAO();
 		dto = new InfoDTO();

@@ -34,6 +34,8 @@ import javax.swing.table.DefaultTableModel;
 
 import InFo.InfoDAO;
 import InFo.InfoDTO;
+import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class Main extends JFrame{
 
@@ -72,6 +74,7 @@ public class Main extends JFrame{
 	 * Create the frame.
 	 */
 	public Main() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
 		setTitle("내 가계부");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
@@ -112,8 +115,9 @@ public class Main extends JFrame{
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
 		
-		JButton input = new JButton("Input");
-		input.addActionListener(new ActionListener() {
+		JButton Input = new JButton("Input");
+		Input.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\plus-16.png"));
+		Input.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -123,9 +127,10 @@ public class Main extends JFrame{
 				
 			}
 		});
-		panel_1.add(input);
+		panel_1.add(Input);
 		
 		JButton edit = new JButton("Edit");
+		edit.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\edit-2-16.gif"));
 		edit.addActionListener(new ActionListener() {
 			
 			@Override
@@ -154,7 +159,8 @@ public class Main extends JFrame{
 		});
 		panel_1.add(edit);
 		
-		JButton report = new JButton("statistic");
+		JButton report = new JButton("Statistics");
+		report.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pie-chart-16.png"));
 		report.addActionListener(new ActionListener() {
 			
 			@Override

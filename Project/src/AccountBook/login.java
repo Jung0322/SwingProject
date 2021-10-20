@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class login extends JFrame {
 
@@ -125,6 +126,7 @@ public class login extends JFrame {
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		
 		JButton btnLogin = new JButton("로그인");
+		btnLogin.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\check-mark-3-16.png"));
 		btnLogin.addActionListener(new ActionListener() {
 			
 			@Override
@@ -146,6 +148,7 @@ public class login extends JFrame {
 		panel_2.add(btnLogin);
 		
 		JButton btnJoin = new JButton("회원가입");
+		btnJoin.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\arrow-34-16.png"));
 		btnJoin.addActionListener(new ActionListener() {
 			
 			@Override
