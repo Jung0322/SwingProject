@@ -36,42 +36,7 @@ public class InfoDAO {
 		return con;
 	}
 
-	public List<InfoDTO> select(String id) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		List<InfoDTO> list = new ArrayList<InfoDTO>();
-
-		try {
-			con = getConnection();
-			String sql = "SELECT * FROM INFO WHERE id = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				InfoDTO dto = new InfoDTO();
-				dto.setNo(rs.getInt("no"));
-				dto.setMoney(rs.getInt("money"));
-				dto.setContent(rs.getString("content"));
-				dto.setSort(rs.getString("sort"));
-				dto.setDay(rs.getDate("day"));
-				dto.setId(rs.getString("id"));
-
-				list.add(dto);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				con.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return list;
-	}
+	
 
 	public InfoDTO search(String id) {
 		Connection con = null;
@@ -291,22 +256,22 @@ public class InfoDAO {
 		return deleteFlag;
 	}
 	
-	public List<InfoDTO> chartselect(String id, String month) {
+	public List<InfoDTO> chartselect(String id, int month, int year) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		
+
 		List<InfoDTO> list = new ArrayList<InfoDTO>();
-		
+
 		try {
 			con = getConnection();
-			String sql = "SELECT * FROM INFO WHERE ID = ? GROUP BY TO_CHAR(DAY,'2021-?')";
+			String sql = "select * from info where id = ? and to_number(to_char(day,'mm')) = ? and to_number(to_char(day,'yy'))=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, month);
+			pstmt.setInt(2, month);
+			pstmt.setInt(3, year);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				InfoDTO dto = new InfoDTO();
 				dto.setNo(rs.getInt("no"));
 				dto.setMoney(rs.getInt("money"));
@@ -314,9 +279,45 @@ public class InfoDAO {
 				dto.setSort(rs.getString("sort"));
 				dto.setDay(rs.getDate("day"));
 				dto.setId(rs.getString("id"));
-							
+
 				list.add(dto);
-			}			
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				con.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return list;
+	}
+	public List<InfoDTO> select(String id) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		List<InfoDTO> list = new ArrayList<InfoDTO>();
+
+		try {
+			con = getConnection();
+			String sql = "SELECT * FROM INFO WHERE id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				InfoDTO dto = new InfoDTO();
+				dto.setNo(rs.getInt("no"));
+				dto.setMoney(rs.getInt("money"));
+				dto.setContent(rs.getString("content"));
+				dto.setSort(rs.getString("sort"));
+				dto.setDay(rs.getDate("day"));
+				dto.setId(rs.getString("id"));
+
+				list.add(dto);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

@@ -127,7 +127,6 @@ public class login extends JFrame {
 					id = textId.getText();
 					Main main = new Main();
 					main.setVisible(true);
-//					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "로그인이 실패히었습니다.");
@@ -144,7 +143,6 @@ public class login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Join join = new Join();
 				join.setVisible(true);
-//				frame.setVisible(false);
 				dispose();
 			}
 		});
