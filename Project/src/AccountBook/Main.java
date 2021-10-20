@@ -1,9 +1,6 @@
 package AccountBook;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-
 import static AccountBook.login.id;
 import java.awt.EventQueue;
 
@@ -11,13 +8,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
+import javax.swing.ComboBoxEditor;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Vector;
 import java.awt.GridLayout;
@@ -25,14 +30,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import InFo.InfoDAO;
 import InFo.InfoDTO;
 
-public class Main extends JFrame  {
+public class Main extends JFrame implements MouseListener {
 
 	private JPanel contentPane;
 	private JTextField text_income;
@@ -43,6 +46,9 @@ public class Main extends JFrame  {
 	private List<InfoDTO> list;
 	private InfoDAO dao = new InfoDAO();
 	private DefaultTableModel model;
+	private int val;
+	private String kind[] = { "수입", "지출" };
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Launch the application.
@@ -68,8 +74,8 @@ public class Main extends JFrame  {
 		setBounds(100, 100, 699, 449);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
@@ -78,7 +84,7 @@ public class Main extends JFrame  {
 		panel.add(lblNewLabel);
 
 		text_income = new JTextField();
-		text_income.setText(String.valueOf(income()));
+		text_income.setText(String.valueOf(income())+"원");
 		panel.add(text_income);
 		text_income.setColumns(10);
 
@@ -86,7 +92,7 @@ public class Main extends JFrame  {
 		panel.add(lblNewLabel_1);
 
 		text_expence = new JTextField();
-		text_expence.setText(String.valueOf(expence()));
+		text_expence.setText(String.valueOf(expence())+"원");
 		panel.add(text_expence);
 		text_expence.setColumns(10);
 
@@ -94,7 +100,7 @@ public class Main extends JFrame  {
 		panel.add(lblNewLabel_2);
 
 		text_total = new JTextField();
-		text_total.setText(String.valueOf(income() - expence()));
+		text_total.setText(String.valueOf(income() - expence())+"원");
 		panel.add(text_total);
 		text_total.setColumns(10);
 
@@ -119,9 +125,17 @@ public class Main extends JFrame  {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Update update = new Update();
-				update.setVisible(true);
-				dispose();
+				String cmd = e.getActionCommand();
+				// Update update
+				if (cmd.equals("Edit")) {
+					if (Integer.toString(val) != null) {
+						Update update = new Update(val);
+						update.setVisible(true);
+					} else {
+						JOptionPane.showMessageDialog(null, "수정할 내역을 선택해주세요.");
+					}
+
+				}
 			}
 		});
 		panel_1.add(edit);
@@ -146,7 +160,9 @@ public class Main extends JFrame  {
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
 		table = new JTable();
-		String columnNames[] = { "Day", "Sort", "Content", "Money" };
+		table.addMouseListener(this);
+
+		String columnNames[] = { "No", "Day", "Sort", "Content", "Money" };
 		model = new DefaultTableModel(columnNames, 0) {
 
 			@Override
@@ -155,14 +171,31 @@ public class Main extends JFrame  {
 			}
 
 		};
-		DefaultTableCellRenderer renderer = new MyDefaultTableCellRenderer();
-		table.setDefaultRenderer(Object.class, renderer);
+
 		table.setModel(model);
-		
+
+		table.getColumnModel().getColumn(0).setMinWidth(0);
+		table.getColumnModel().getColumn(0).setMaxWidth(0);
 
 		scrollPane.setViewportView(table);
-		showTable();
 
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(kind));
+		comboBox.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (comboBox.getSelectedItem().toString().equals("수입")) {
+					IncomeshowTable();
+				}else {
+					ExpenseshowTable();
+				}
+				
+			}
+		});
+		panel.add(comboBox);
+		IncomeshowTable();
+		
 	}
 
 	// 수입 함수
@@ -196,35 +229,69 @@ public class Main extends JFrame  {
 	}
 
 	// select 보여주는 함수
-	public void showTable() {
+	public void IncomeshowTable() {
+		model.setNumRows(0);
 		if (!list.isEmpty()) {
 			for (InfoDTO dto : list) {
-				Vector<Object> newVec = new Vector<Object>();
-				newVec.add(dto.getDay());
-				newVec.add(dto.getSort());
-				newVec.add(dto.getContent());
-				newVec.add(dto.getMoney());
-				model.addRow(newVec);
+				if (dto.getSort().equals("수입")) {
+					Vector<Object> newVec = new Vector<Object>();
+					newVec.add(dto.getNo());
+					newVec.add(dto.getDay());
+					newVec.add(dto.getSort());
+					newVec.add(dto.getContent());
+					newVec.add(dto.getMoney());
+					model.addRow(newVec);
+				}
 			}
 		}
 	}
 
-	public class MyDefaultTableCellRenderer extends DefaultTableCellRenderer {
-
-		@Override
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-				int row, int column) {
-			Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+	public void ExpenseshowTable() {
+		model.setNumRows(0);
+		if (!list.isEmpty()) {
 			for (InfoDTO dto : list) {
 				if (dto.getSort().equals("지출")) {
-					component.setBackground(Color.BLUE);
-				} else {
-					component.setBackground(Color.red);
+					Vector<Object> newVec = new Vector<Object>();
+					newVec.add(dto.getNo());
+					newVec.add(dto.getDay());
+					newVec.add(dto.getSort());
+					newVec.add(dto.getContent());
+					newVec.add(dto.getMoney());
+					model.addRow(newVec);
 				}
 			}
-
-			return component;
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		JTable jTable = (JTable) e.getSource();
+		val = (int) model.getValueAt(jTable.getSelectedRow(), 0);
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
