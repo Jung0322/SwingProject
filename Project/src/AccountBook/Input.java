@@ -37,7 +37,7 @@ public class Input extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private JTextField tfDate;
 	private JTextField tfMoney;
-	private JComboBox<String> combdBox;
+	private JComboBox<String> comboBox;
 	private String PayKind[] = { "식비", "교통", "주거/통신", "경조사/회비", "패션/미용", "교육", "문화생활", "기타" };
 	private String IncomeKind[] = { "월급", "부수입", "상여", "금융소득", "용돈", "기타" };
 	private JPanel panel_1;
@@ -113,9 +113,9 @@ public class Input extends JFrame implements ActionListener{
 		lblNewLabel_2.setFont(new Font("맑은 고딕", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_2);
 
-		combdBox = new JComboBox();
-		combdBox.setModel(new DefaultComboBoxModel(PayKind));
-		panel_1.add(combdBox);
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(PayKind));
+		panel_1.add(comboBox);
 
 		JLabel lblNewLabel_3 = new JLabel("\uAE08\uC561");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
@@ -139,7 +139,7 @@ public class Input extends JFrame implements ActionListener{
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				combdBox.setModel(new DefaultComboBoxModel(IncomeKind));
+				comboBox.setModel(new DefaultComboBoxModel(IncomeKind));
 				kind = "수입";
 				
 
@@ -152,7 +152,7 @@ public class Input extends JFrame implements ActionListener{
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				combdBox.setModel(new DefaultComboBoxModel(PayKind));
+				comboBox.setModel(new DefaultComboBoxModel(PayKind));
 				kind="지출";
 			}
 		});
@@ -171,18 +171,8 @@ public class Input extends JFrame implements ActionListener{
 		String cmd = e.getActionCommand();
 		
 		if(cmd.equals("확인")) {
-			//사용자 입력값 가져오기
-			//라디오 버튼 선택된 값 가져오기
-			System.out.println(kind);
-			//날짜 가져오기
-			System.out.println(tfDate.getText());
-			//내역 가져오기
-			System.out.println(combdBox.getSelectedItem().toString());
-			//금액 가져오기
-			System.out.println(tfMoney.getText());
-			
-			
-			boolean flag =  dao.Input(tfDate.getText(), combdBox.getSelectedItem().toString(),tfMoney.getText(), kind,id);
+
+			boolean flag =  dao.Input(tfDate.getText(), comboBox.getSelectedItem().toString(),tfMoney.getText(), kind,id);
 			if(flag) {
 				Main main = new Main();
 				main.setVisible(true);

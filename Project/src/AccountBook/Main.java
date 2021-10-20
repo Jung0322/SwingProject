@@ -8,13 +8,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
@@ -42,8 +47,10 @@ public class Main extends JFrame{
 	private InfoDAO dao = new InfoDAO();
 	private DefaultTableModel model;
 	private int val = 0;
-	
 	private DecimalFormat formatter = new DecimalFormat("###,###");
+	private String kind[] = { "수입", "지출" };
+	private JComboBox<String> comboBox;
+
 
 	/**
 	 * Launch the application.
@@ -183,8 +190,24 @@ public class Main extends JFrame{
         table.getColumnModel().getColumn(0).setMinWidth(0);
 	    table.getColumnModel().getColumn(0).setMaxWidth(0);	
          
-         scrollPane.setViewportView(table);
-         showTable();
+	    comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(kind));
+		comboBox.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (comboBox.getSelectedItem().toString().equals("수입")) {
+					IncomeshowTable();
+				} else {
+					ExpenseshowTable();
+				}
+
+				
+			}
+		});
+		panel.add(comboBox);
+		 scrollPane.setViewportView(table);
+		IncomeshowTable();
         
  
 	}
@@ -219,20 +242,39 @@ public class Main extends JFrame{
 		
 	}
 	// select 보여주는 함수
-	public void showTable() {
-		if(!list.isEmpty()) {
-			for(InfoDTO dto : list) {
-				Vector<Object> newVec = new Vector<Object>();
-				newVec.add(dto.getNo());
-				newVec.add(dto.getDay());
-				newVec.add(dto.getSort());
-				newVec.add(dto.getContent());
-				newVec.add(formatter.format(dto.getMoney()));
-				model.addRow(newVec);
+	public void IncomeshowTable() {
+		model.setNumRows(0);
+		if (!list.isEmpty()) {
+			for (InfoDTO dto : list) {
+				if (dto.getSort().equals("수입")) {
+					Vector<Object> newVec = new Vector<Object>();
+					newVec.add(dto.getNo());
+					newVec.add(dto.getDay());
+					newVec.add(dto.getSort());
+					newVec.add(dto.getContent());
+					newVec.add(dto.getMoney());
+					model.addRow(newVec);
+				}
+			}
+		}
+	}
+
+	public void ExpenseshowTable() {
+		model.setNumRows(0);
+		if (!list.isEmpty()) {
+			for (InfoDTO dto : list) {
+				if (dto.getSort().equals("지출")) {
+					Vector<Object> newVec = new Vector<Object>();
+					newVec.add(dto.getNo());
+					newVec.add(dto.getDay());
+					newVec.add(dto.getSort());
+					newVec.add(dto.getContent());
+					newVec.add(dto.getMoney());
+					model.addRow(newVec);
+				}
 			}
 		}
 	}
 
 
 }
-
