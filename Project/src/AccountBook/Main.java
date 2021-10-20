@@ -58,100 +58,6 @@ public class Main extends JFrame{
 		});
 	}
 
-<<<<<<< HEAD
-   /**
-    * Create the frame.
-    */
-   public Main() {
-   	setTitle("Main");
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setBounds(100, 100, 699, 449);
-      contentPane = new JPanel();
-      contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-      contentPane.setLayout(new BorderLayout(0, 0));
-      setContentPane(contentPane);
-      
-      JPanel panel = new JPanel();
-      contentPane.add(panel, BorderLayout.NORTH);
-      
-      JLabel lblNewLabel = new JLabel("Income");
-      panel.add(lblNewLabel);
-      
-      text_income = new JTextField();
-      text_income.setText(formatter.format(income()));
-      panel.add(text_income);
-      text_income.setColumns(10);
-      
-      JLabel lblNewLabel_1 = new JLabel("Expence");
-      panel.add(lblNewLabel_1);
-      
-      text_expence = new JTextField();
-      text_expence.setText(formatter.format(expence()));
-      panel.add(text_expence);
-      text_expence.setColumns(10);
-      
-      JLabel lblNewLabel_2 = new JLabel("Total");
-      panel.add(lblNewLabel_2);
-      
-      text_total = new JTextField();
-      text_total.setText(formatter.format(income()-expence()));
-      panel.add(text_total);
-      text_total.setColumns(10);
-      
-      JPanel panel_1 = new JPanel();
-      contentPane.add(panel_1, BorderLayout.SOUTH);
-      
-      
-      JButton input = new JButton("Input");
-      input.addActionListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            Input input = new Input();
-            input.setVisible(true);
-            dispose();
-            
-         }
-      });
-      panel_1.add(input);
-      
-      JButton edit = new JButton("Edit");
-      edit.addActionListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            String cmd = e.getActionCommand();
-            if (cmd.equals("Edit")) {
-            Update update = new Update(val);
-            update.setVisible(true);
-            //dispose();
-            }
-         }
-      });
-      panel_1.add(edit);
-      
-      JButton report = new JButton("statistic");
-      report.addActionListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            if(income()==0&&expence()==0) {
-               JOptionPane.showMessageDialog(null, "통계할 데이터가 없습니다.");
-            }else {
-               Report report = new Report();
-               report.setVisible(true);
-               dispose();
-            }
-         }
-      });
-      panel_1.add(report);
-      
-      JScrollPane scrollPane = new JScrollPane();
-      contentPane.add(scrollPane, BorderLayout.CENTER);
-      
-      table = new JTable();
-      table.addMouseListener(new MouseListener() {
-=======
 	/**
 	 * Create the frame.
 	 */
@@ -162,7 +68,6 @@ public class Main extends JFrame{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
@@ -325,4 +230,3 @@ public class Main extends JFrame{
 
 
 }
-

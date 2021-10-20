@@ -1,24 +1,18 @@
 package AccountBook;
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 //import com.sun.corba.se.impl.transport.DefaultIORToSocketInfoImpl;
-
 import InFo.InfoDAO;
 import InFo.InfoDTO;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,9 +32,7 @@ import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.Font;
 import static AccountBook.login.id;
-
 public class Update extends JFrame {
-
 	private JPanel contentPane;
 	private JTextField dayTxt, moneyTxt;
 	private JComboBox<String> combdBox;
@@ -53,41 +45,27 @@ public class Update extends JFrame {
 	public InfoDTO dto;
 	private JRadioButton rdbtnExpense, rdbtnIncom;
 	private String kind = "지출";
-
 	public Update(int val) {
-<<<<<<< HEAD
-		setTitle("Update");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
-=======
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
-
 		dao = new InfoDAO();
 		dto = new InfoDTO();
 		dto = dao.noSelect(val);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.SOUTH);
-
 		JButton confirm = new JButton("\uD655\uC778");
 		confirm.setHorizontalAlignment(SwingConstants.RIGHT);
 		confirm.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				String cmd = e.getActionCommand();
 				if (cmd.equals("확인")) {
-
 					boolean flag = dao.update(dayTxt.getText(), combdBox.getSelectedItem().toString(), kind,
 							moneyTxt.getText(), val);
-
 					if (flag) {
 						JOptionPane.showMessageDialog(null, "수정 완료 되었습니다.");
 						Main main = new Main();
@@ -98,13 +76,13 @@ public class Update extends JFrame {
 			}
 		});
 		panel.add(confirm);
-
 		JButton delete = new JButton("\uC0AD\uC81C");
 		delete.setHorizontalAlignment(SwingConstants.RIGHT);
 		delete.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+
 				String cmd = e.getActionCommand();
 				if (cmd.equals("삭제")) {
 					boolean deleteFlag = dao.deleteRow(val);
@@ -120,63 +98,47 @@ public class Update extends JFrame {
 			}
 		});
 		panel.add(delete);
-
 		panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(3, 2, 0, 0));
-
 		JLabel lblNewLabel_1 = new JLabel("\uB0A0\uC9DC");
 		lblNewLabel_1.setFont(new Font("굴림", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_1);
-
 		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String today = sdFormat.format(dto.getDay());
-
 		dayTxt = new JTextField();
 		panel_1.add(dayTxt);
 		dayTxt.setColumns(10);
 		dayTxt.setText(today);
-
 		JLabel lblNewLabel_2 = new JLabel("\uB0B4\uC5ED");
 		lblNewLabel_2.setFont(new Font("굴림", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_2);
-
 		combdBox = new JComboBox();
 		combdBox.setModel(new DefaultComboBoxModel(PayKind));
 		panel_1.add(combdBox);
-
 		JLabel lblNewLabel_3 = new JLabel("\uAE08\uC561");
 		lblNewLabel_3.setFont(new Font("굴림", Font.PLAIN, 20));
 		panel_1.add(lblNewLabel_3);
-
 		String strMoney = String.valueOf(dto.getMoney());
-
 		moneyTxt = new JTextField();
 		panel_1.add(moneyTxt);
 		moneyTxt.setColumns(10);
 		moneyTxt.setText(strMoney);
-
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.NORTH);
-
 		JLabel lblNewLabel = new JLabel("\uC218\uC815");
 		lblNewLabel.setFont(new Font("굴림", Font.PLAIN, 25));
 		panel_2.add(lblNewLabel);
-
 		rdbtnIncom = new JRadioButton("\uC218\uC785");
-
 		rdbtnIncom.addItemListener(new ItemListener() {
-
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				combdBox.setModel(new DefaultComboBoxModel(IncomeKind));
-
 			}
 		});
 		panel_2.add(rdbtnIncom);
 		rdbtnExpense = new JRadioButton("\uC9C0\uCD9C");
 		rdbtnExpense.addItemListener(new ItemListener() {
-
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				combdBox.setModel(new DefaultComboBoxModel(PayKind));
@@ -184,14 +146,11 @@ public class Update extends JFrame {
 		});
 		rdbtnExpense.setSelected(true);
 		panel_2.add(rdbtnExpense);
-
 		ButtonGroup group = new ButtonGroup();
 		group.add(rdbtnIncom);
 		group.add(rdbtnExpense);
-
 		if (dto.getSort().equals("수입")) {
 			rdbtnIncom.setSelected(true);
-
 			switch (dto.getContent()) {
 			case "월급":
 				combdBox.setSelectedIndex(0);
@@ -211,12 +170,9 @@ public class Update extends JFrame {
 			case "기타":
 				combdBox.setSelectedIndex(5);
 				break;
-
 			}
-
 		} else {
 			rdbtnExpense.setSelected(true);
-
 			switch (dto.getContent()) {
 			case "식비":
 				combdBox.setSelectedIndex(0);
@@ -243,8 +199,6 @@ public class Update extends JFrame {
 				combdBox.setSelectedIndex(7);
 				break;
 			}
-
 		}
-
 	}
-}
+}	

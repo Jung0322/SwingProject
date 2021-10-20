@@ -25,7 +25,7 @@ public class InfoDAO {
 
 	public static Connection getConnection() {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "c##javaUser";
+		String user = "c##java";
 		String password = "12345";
 		Connection con = null;
 		try {
