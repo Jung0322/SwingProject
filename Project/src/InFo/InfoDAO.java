@@ -113,23 +113,25 @@ public class InfoDAO {
 		return dto;
 	}
 
-	public boolean update(Date day, String content, int sort,int money,int no, String id) {
+	public boolean update(String date, String content, String sort, String money, int no) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		boolean updateFlag = false;
 
 		try {
 			con = getConnection();
-			String sql = "update InFo set date=? and content=? and sort=? and money=? where no=? and id=?";
+			String sql = "update InFo set money=?,content=?,sort=?,day=? where no=?";
+			
+			
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setDate(1, day);
-			pstmt.setNString(2, content);
-			pstmt.setInt(3, sort);
-			pstmt.setInt(4, money);
+			pstmt.setInt(1,Integer.parseInt(money));
+			pstmt.setString(2, content);
+			pstmt.setString(3, sort);
+			pstmt.setString(4, date);
 			pstmt.setInt(5, no);
-			pstmt.setNString(6, id);;
-
+			
+			
 			int result = pstmt.executeUpdate();
 			if (result > 0) {
 				updateFlag = true;
@@ -280,8 +282,8 @@ public class InfoDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				con.close();
 				pstmt.close();
+				con.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}

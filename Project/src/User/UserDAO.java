@@ -165,6 +165,4 @@ public class UserDAO {
 		}
 		return flag;
 	}
-
 }
-

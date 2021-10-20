@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -24,7 +25,6 @@ import java.awt.Color;
 import javax.swing.JProgressBar;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import java.awt.Toolkit;
 
 public class Report extends JFrame {
 	private List<InfoDTO> list;
@@ -51,8 +51,10 @@ public class Report extends JFrame {
 	 * Create the frame.
 	 */
 	public Report() {
+
 		setTitle("통계");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 350);
 		contentPane = new JPanel();

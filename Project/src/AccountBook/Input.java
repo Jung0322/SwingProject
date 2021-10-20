@@ -17,6 +17,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
@@ -29,7 +31,6 @@ import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.Font;
 import static AccountBook.login.id;
-import java.awt.Toolkit;
 
 public class Input extends JFrame implements ActionListener{
 
@@ -64,8 +65,10 @@ public class Input extends JFrame implements ActionListener{
 //	}
 
 	public Input() {
+
 		setTitle("입력");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
