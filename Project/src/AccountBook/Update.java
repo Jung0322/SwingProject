@@ -89,16 +89,6 @@ public class Update extends JFrame {
 						main.setVisible(true);
 						dispose();
 					}
-				} else if (cmd.equals("삭제")) {
-					boolean deleteFlag = dao.deleteRow(val);
-					if (deleteFlag) {
-						JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
-					} else {
-						JOptionPane.showMessageDialog(null, "삭제 실패.");
-					}
-					Main main = new Main();
-					main.setVisible(true);
-					dispose();
 				}
 			}
 		});
@@ -110,7 +100,18 @@ public class Update extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				String cmd = e.getActionCommand();
+				if (cmd.equals("삭제")) {
+					boolean deleteFlag = dao.deleteRow(val);
+					if (deleteFlag) {
+						JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
+					} else {
+						JOptionPane.showMessageDialog(null, "삭제 실패.");
+					}
+					Main main = new Main();
+					main.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		panel.add(delete);
