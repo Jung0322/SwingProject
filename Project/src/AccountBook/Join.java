@@ -50,11 +50,7 @@ public class Join extends JFrame {
 	 * Create the frame.
 	 */
 	public Join() {
-<<<<<<< HEAD
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
-=======
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Join.class.getResource("/AccountBook/pigbank.png")));
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 		setTitle("회원가입");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 362, 191);

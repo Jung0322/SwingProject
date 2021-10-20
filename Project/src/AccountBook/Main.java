@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -34,11 +35,8 @@ import javax.swing.table.DefaultTableModel;
 
 import InFo.InfoDAO;
 import InFo.InfoDTO;
-<<<<<<< HEAD
-import javax.swing.ImageIcon;
-=======
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 import java.awt.Toolkit;
+import javax.swing.SwingConstants;
 
 public class Main extends JFrame{
 
@@ -52,7 +50,7 @@ public class Main extends JFrame{
 	private InfoDAO dao = new InfoDAO();
 	private DefaultTableModel model;
 	private int val = 0;
-	private DecimalFormat formatter = new DecimalFormat("###,###");
+	private DecimalFormat formatter = new DecimalFormat("###,###원");
 	private String kind[] = { "수입", "지출" };
 	private JComboBox<String> comboBox;
 
@@ -77,11 +75,7 @@ public class Main extends JFrame{
 	 * Create the frame.
 	 */
 	public Main() {
-<<<<<<< HEAD
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
-=======
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/AccountBook/pigbank.png")));
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
 		setTitle("내 가계부");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
@@ -94,26 +88,29 @@ public class Main extends JFrame{
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel = new JLabel("Income");
+		JLabel lblNewLabel = new JLabel("수입");
 		panel.add(lblNewLabel);
 		
 		text_income = new JTextField();
+		text_income.setHorizontalAlignment(SwingConstants.RIGHT);
 	    text_income.setText(formatter.format(income()));
 		panel.add(text_income);
 		text_income.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Expence");
+		JLabel lblNewLabel_1 = new JLabel("지출");
 		panel.add(lblNewLabel_1);
 		
 		text_expence = new JTextField();
+		text_expence.setHorizontalAlignment(SwingConstants.RIGHT);
 		text_expence.setText(formatter.format(expence()));
 		panel.add(text_expence);
 		text_expence.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Total");
+		JLabel lblNewLabel_2 = new JLabel("총합");
 		panel.add(lblNewLabel_2);
 		
 		text_total = new JTextField();
+		text_total.setHorizontalAlignment(SwingConstants.RIGHT);
 		text_total.setText(formatter.format(income()-expence()));
 		panel.add(text_total);
 		text_total.setColumns(10);
@@ -122,7 +119,7 @@ public class Main extends JFrame{
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
 		
-		JButton Input = new JButton("Input");
+		JButton Input = new JButton("입력");
 		Input.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\plus-16.png"));
 		Input.addActionListener(new ActionListener() {
 			
@@ -136,7 +133,7 @@ public class Main extends JFrame{
 		});
 		panel_1.add(Input);
 		
-		JButton edit = new JButton("Edit");
+		JButton edit = new JButton("수정");
 		edit.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\edit-2-16.gif"));
 		edit.addActionListener(new ActionListener() {
 			
@@ -152,7 +149,7 @@ public class Main extends JFrame{
 				}
 					
 				
-				if (cmd.equals("Edit")) {
+				if (cmd.equals("수정")) {
 					if(val==0) {
 						JOptionPane.showMessageDialog(null, "수정할 내역을 선택해주세요.");
 					}else {
@@ -166,7 +163,7 @@ public class Main extends JFrame{
 		});
 		panel_1.add(edit);
 		
-		JButton report = new JButton("Statistics");
+		JButton report = new JButton("통계");
 		report.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pie-chart-16.png"));
 		report.addActionListener(new ActionListener() {
 			

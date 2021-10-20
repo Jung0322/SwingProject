@@ -91,6 +91,8 @@ public class login extends JFrame {
 		textId.setColumns(10);
 		
 		JLabel lbl6 = new JLabel("");
+		lbl6.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbl6.setIcon(null);
 		panel_1.add(lbl6);
 		
 		JLabel lbl7 = new JLabel("");

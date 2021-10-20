@@ -48,13 +48,8 @@ public class Update extends JFrame {
 	private JRadioButton rdbtnExpense, rdbtnIncom;
 	private String kind = "지출";
 	public Update(int val) {
-<<<<<<< HEAD
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
-=======
 		setTitle("수정");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Update.class.getResource("/AccountBook/pigbank.png")));
->>>>>>> branch 'master' of https://github.com/Jung0322/SwingProject.git
-
 		dao = new InfoDAO();
 		dto = new InfoDTO();
 		dto = dao.noSelect(val);
