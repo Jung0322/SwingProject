@@ -65,7 +65,8 @@ public class Input extends JFrame implements ActionListener{
 //	}
 
 	public Input() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank2.png"));
+		setTitle("입력");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Input.class.getResource("/AccountBook/pigbank.png")));
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

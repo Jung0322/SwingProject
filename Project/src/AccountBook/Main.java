@@ -34,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
 
 import InFo.InfoDAO;
 import InFo.InfoDTO;
+import java.awt.Toolkit;
 
 public class Main extends JFrame{
 
@@ -72,6 +73,7 @@ public class Main extends JFrame{
 	 * Create the frame.
 	 */
 	public Main() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/AccountBook/pigbank.png")));
 		setTitle("내 가계부");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 699, 449);
