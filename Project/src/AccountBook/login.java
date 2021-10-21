@@ -13,15 +13,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class login extends JFrame {
 
@@ -51,10 +51,9 @@ public class login extends JFrame {
 	 * Create the frame.
 	 */
 	public login() {
-
 		setTitle("알뜰살뜰 가계부_티끌모아 건물주되자!!");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
-
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -93,6 +92,7 @@ public class login extends JFrame {
 		JLabel lbl6 = 	new JLabel("");
 		lbl6.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbl6.setIcon(null);
+
 		panel_1.add(lbl6);
 		
 		JLabel lbl7 = new JLabel("");
@@ -145,7 +145,8 @@ public class login extends JFrame {
 					JOptionPane.showMessageDialog(null, "로그인이 실패히었습니다.");
 				}
 				
-			}
+
+}
 		});
 		panel_2.add(btnLogin);
 		

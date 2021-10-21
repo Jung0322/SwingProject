@@ -25,7 +25,7 @@ public class InfoDAO {
 
 	public static Connection getConnection() {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String user = "c##java";
+		String user = "c##javaUser";
 		String password = "12345";
 		Connection con = null;
 		try {
@@ -291,42 +291,4 @@ public class InfoDAO {
 		return deleteFlag;
 	}
 	
-	public List<InfoDTO> chartselect(String id, String month) {
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		
-		List<InfoDTO> list = new ArrayList<InfoDTO>();
-		
-		try {
-			con = getConnection();
-			String sql = "SELECT * FROM INFO WHERE ID = ? GROUP BY TO_CHAR(DAY,'2021-?')";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, month);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				InfoDTO dto = new InfoDTO();
-				dto.setNo(rs.getInt("no"));
-				dto.setMoney(rs.getInt("money"));
-				dto.setContent(rs.getString("content"));
-				dto.setSort(rs.getString("sort"));
-				dto.setDay(rs.getDate("day"));
-				dto.setId(rs.getString("id"));
-							
-				list.add(dto);
-			}			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				con.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		return list;
-	}
 }
