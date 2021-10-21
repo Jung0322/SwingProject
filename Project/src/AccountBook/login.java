@@ -90,7 +90,7 @@ public class login extends JFrame {
 		panel_1.add(textId);
 		textId.setColumns(10);
 		
-		JLabel lbl6 = new JLabel("");
+		JLabel lbl6 = 	new JLabel("");
 		lbl6.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbl6.setIcon(null);
 		panel_1.add(lbl6);
