@@ -61,9 +61,9 @@ public class Join extends JFrame {
 	public Join() {
 		setTitle("ȸ 회원가입");
 		//Ÿ��Ʋ ������ ����
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Join.class.getResource("/Accountbook/JoinTitle.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Join.class.getResource("/AccountBook/pigbank.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 395, 370);
+		setBounds(100, 100, 650, 550);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,18 +95,19 @@ public class Join extends JFrame {
 		panel_1.setLayout(new GridLayout(0, 3, 0, 0));
 
 		JLabel lblNewLabel_1 = new JLabel("ID 입력 : ");
-		lblNewLabel_1.setFont(new Font("IM���� Bold", Font.PLAIN, 12));
+		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 25));
 		lblNewLabel_1.setBackground(Color.WHITE);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(lblNewLabel_1);
 
 		id = new JTextField();
+		id.setFont(new Font("굴림", Font.PLAIN, 25));
 		id.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(id);
 		id.setColumns(10);
 
 		JButton overlap = new JButton("중복 확인");
-		overlap.setFont(new Font("IM���� Bold", Font.PLAIN, 12));
+		overlap.setFont(new Font("Dialog", Font.PLAIN, 25));
 		overlap.setForeground(Color.WHITE);
 		overlap.setBackground(Color.BLACK);
 		//�ߺ�Ȯ�� ��ư�� �̹��� ����
@@ -118,21 +119,22 @@ public class Join extends JFrame {
 				Boolean flag = dao.overlop(id.getText());
 				if(flag) {
 					System.out.println("aa");
-					JOptionPane.showMessageDialog(null, "�����ϴ� id�� �ֽ��ϴ�.");
+					JOptionPane.showMessageDialog(null, "아이디가 중복 되었습니다 .");
 				}else {
-					JOptionPane.showMessageDialog(null, "��밡���� id �Դϴ�.");
+					JOptionPane.showMessageDialog(null, "사용할 수 있는 아이디입니다.");
 				}
 			}
 		});
 		panel_1.add(overlap);
 
 		JLabel Label = new JLabel("\uC774\uB984 \uC785\uB825 : ");
-		Label.setFont(new Font("IM���� Bold", Font.PLAIN, 12));
+		Label.setFont(new Font("Dialog", Font.PLAIN, 25));
 		Label.setBackground(Color.WHITE);
 		Label.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(Label);
 
 		name = new JTextField();
+		name.setFont(new Font("굴림", Font.PLAIN, 25));
 		panel_1.add(name);
 		name.setColumns(10);
 
@@ -141,12 +143,13 @@ public class Join extends JFrame {
 		panel_1.add(lblNewLabel_3);
 
 		JLabel lblNewLabel_4 = new JLabel("\uBE44\uBC00\uBC88\uD638 \uC785\uB825 : ");
-		lblNewLabel_4.setFont(new Font("IM���� Bold", Font.PLAIN, 12));
+		lblNewLabel_4.setFont(new Font("Dialog", Font.PLAIN, 25));
 		lblNewLabel_4.setBackground(Color.WHITE);
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_1.add(lblNewLabel_4);
 
 		password = new JPasswordField();
+		password.setFont(new Font("굴림", Font.PLAIN, 25));
 		password.setEchoChar('*');
 		panel_1.add(password);
 		password.setColumns(10);
@@ -160,28 +163,28 @@ public class Join extends JFrame {
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 
 		JButton confirm = new JButton("확인");
-		confirm.setFont(new Font("IM���� Bold", Font.PLAIN, 12));
+		confirm.setFont(new Font("Dialog", Font.PLAIN, 25));
 		confirm.setForeground(Color.WHITE);
 		confirm.setBackground(Color.BLACK);
 		confirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Boolean flag = dao.join(id.getText(), password.getText(), name.getText());
 				if(flag) {
-					JOptionPane.showMessageDialog(null, "ȸ�������� �Ϸ�Ǿ����ϴ�.");
+					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
 					login login = new login();
 					login.setVisible(true);
 //					frame.setVisible(false);
 //					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					dispose();
 				}else {
-					JOptionPane.showMessageDialog(null, "ȸ�������� �����Ͽ����ϴ�.");
+					JOptionPane.showMessageDialog(null, "정보를 다시 입력해주세요.");
 				}
 			}
 		});
 		panel_2.add(confirm);
 
 		JButton cancel = new JButton("취소");
-		cancel.setFont(new Font("IM���� Bold", Font.PLAIN, 12));
+		cancel.setFont(new Font("Dialog", Font.PLAIN, 25));
 		cancel.setForeground(Color.WHITE);
 		cancel.setBackground(Color.BLACK);
 		cancel.addActionListener(new ActionListener() {

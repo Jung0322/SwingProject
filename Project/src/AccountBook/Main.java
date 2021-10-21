@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
+
+import javax.swing.ImageIcon;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
@@ -22,6 +25,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Vector;
 import java.awt.GridLayout;
@@ -33,6 +37,9 @@ import javax.swing.table.DefaultTableModel;
 
 import InFo.InfoDAO;
 import InFo.InfoDTO;
+import java.awt.Toolkit;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class Main extends JFrame{
 
@@ -46,8 +53,12 @@ public class Main extends JFrame{
 	private InfoDAO dao = new InfoDAO();
 	private DefaultTableModel model;
 	private int val = 0;
-	private String kind[] = { "수입", "지출" };
+
+	private DecimalFormat formatter = new DecimalFormat("###,###원");
+	private String kind[] = { "수입", "지출","전체" };
 	private JComboBox<String> comboBox;
+
+
 
 	/**
 	 * Launch the application.
@@ -69,37 +80,49 @@ public class Main extends JFrame{
 	 * Create the frame.
 	 */
 	public Main() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/AccountBook/pigbank.png")));
+		setTitle("내 가계부");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 699, 449);
+		setBounds(100, 100, 1000, 900);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel = new JLabel("Income");
+		JLabel lblNewLabel = new JLabel("수입");
+		lblNewLabel.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		panel.add(lblNewLabel);
 		
 		text_income = new JTextField();
-		text_income.setText(String.valueOf(income()));
+		text_income.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
+		text_income.setHorizontalAlignment(SwingConstants.RIGHT);
+	    text_income.setText(formatter.format(income()));
 		panel.add(text_income);
 		text_income.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Expence");
+		JLabel lblNewLabel_1 = new JLabel("지출");
+		lblNewLabel_1.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		panel.add(lblNewLabel_1);
 		
 		text_expence = new JTextField();
-		text_expence.setText(String.valueOf(expence()));
+		text_expence.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
+		text_expence.setHorizontalAlignment(SwingConstants.RIGHT);
+		text_expence.setText(formatter.format(expence()));
 		panel.add(text_expence);
 		text_expence.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Total");
+		JLabel lblNewLabel_2 = new JLabel("총합");
+		lblNewLabel_2.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		panel.add(lblNewLabel_2);
 		
 		text_total = new JTextField();
-		text_total.setText(String.valueOf(income()-expence()));
+		text_total.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
+		text_total.setHorizontalAlignment(SwingConstants.RIGHT);
+		text_total.setText(formatter.format(income()-expence()));
 		panel.add(text_total);
 		text_total.setColumns(10);
 		
@@ -107,8 +130,11 @@ public class Main extends JFrame{
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
 		
-		JButton input = new JButton("Input");
-		input.addActionListener(new ActionListener() {
+		JButton Input = new JButton("입력");
+		Input.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
+		Input.setHorizontalAlignment(SwingConstants.LEFT);
+		Input.setIcon(new ImageIcon(Main.class.getResource("/AccountBook/plus-16.png")));
+		Input.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -118,9 +144,11 @@ public class Main extends JFrame{
 				
 			}
 		});
-		panel_1.add(input);
+		panel_1.add(Input);
 		
-		JButton edit = new JButton("Edit");
+		JButton edit = new JButton("수정");
+		edit.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
+		edit.setIcon(new ImageIcon(Main.class.getResource("/AccountBook/edit-2-16.gif")));
 		edit.addActionListener(new ActionListener() {
 			
 			@Override
@@ -135,12 +163,13 @@ public class Main extends JFrame{
 				}
 					
 				
-				if (cmd.equals("Edit")) {
+				if (cmd.equals("수정")) {
 					if(val==0) {
 						JOptionPane.showMessageDialog(null, "수정할 내역을 선택해주세요.");
 					}else {
 						Update update = new Update(val);
 						update.setVisible(true);
+						dispose();
 					}
 								
 				
@@ -149,7 +178,9 @@ public class Main extends JFrame{
 		});
 		panel_1.add(edit);
 		
-		JButton report = new JButton("statistic");
+		JButton report = new JButton("통계");
+		report.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
+		report.setIcon(new ImageIcon(Main.class.getResource("/AccountBook/pie-chart-16.png")));
 		report.addActionListener(new ActionListener() {
 			
 			@Override
@@ -170,6 +201,8 @@ public class Main extends JFrame{
 		
 		table = new JTable();
 		//table.addMouseListener(this);
+		table.setRowHeight(30);
+		table.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		
 		String columnNames [] = {"No","Day","Sort","Content","Money"};
 		model = new DefaultTableModel(columnNames,0) {
@@ -186,6 +219,7 @@ public class Main extends JFrame{
 	    table.getColumnModel().getColumn(0).setMaxWidth(0);	
          
 	    comboBox = new JComboBox();
+	    comboBox.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		comboBox.setModel(new DefaultComboBoxModel(kind));
 		comboBox.addItemListener(new ItemListener() {
 			
@@ -193,8 +227,10 @@ public class Main extends JFrame{
 			public void itemStateChanged(ItemEvent e) {
 				if (comboBox.getSelectedItem().toString().equals("수입")) {
 					IncomeshowTable();
-				} else {
+				} else if(comboBox.getSelectedItem().toString().equals("지출")){
 					ExpenseshowTable();
+				}else {
+					TotalshowTable();
 				}
 
 				
@@ -247,12 +283,15 @@ public class Main extends JFrame{
 					newVec.add(dto.getDay());
 					newVec.add(dto.getSort());
 					newVec.add(dto.getContent());
-					newVec.add(dto.getMoney());
+
+					newVec.add(formatter.format(dto.getMoney()));
 					model.addRow(newVec);
 				}
 			}
 		}
 	}
+
+	
 
 	public void ExpenseshowTable() {
 		model.setNumRows(0);
@@ -264,9 +303,25 @@ public class Main extends JFrame{
 					newVec.add(dto.getDay());
 					newVec.add(dto.getSort());
 					newVec.add(dto.getContent());
-					newVec.add(dto.getMoney());
+					newVec.add(formatter.format(dto.getMoney()));
 					model.addRow(newVec);
 				}
+			}
+		}
+	}
+	
+	public void TotalshowTable() {
+		model.setNumRows(0);
+		if (!list.isEmpty()) {
+			for (InfoDTO dto : list) {
+					Vector<Object> newVec = new Vector<Object>();
+					newVec.add(dto.getNo());
+					newVec.add(dto.getDay());
+					newVec.add(dto.getSort());
+					newVec.add(dto.getContent());
+					newVec.add(formatter.format(dto.getMoney()));
+					model.addRow(newVec);
+				
 			}
 		}
 	}

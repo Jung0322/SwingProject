@@ -45,6 +45,7 @@ public class Update extends JFrame {
 	public InfoDTO dto;
 	private JRadioButton rdbtnExpense, rdbtnIncom;
 	private String kind = "지출";
+	
 	public Update(int val) {
 		setTitle("수정");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Update.class.getResource("/AccountBook/pigbank.png")));
@@ -52,7 +53,7 @@ public class Update extends JFrame {
 		dto = new InfoDTO();
 		dto = dao.noSelect(val);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -63,7 +64,7 @@ public class Update extends JFrame {
 		JButton confirm = new JButton("\uD655\uC778");
 		confirm.setForeground(Color.WHITE);
 		confirm.setBackground(Color.BLACK);
-		confirm.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
+		confirm.setFont(new Font("IM혜민 Bold", Font.PLAIN, 25));
 		confirm.setHorizontalAlignment(SwingConstants.RIGHT);
 		confirm.addActionListener(new ActionListener() {
 			@Override
@@ -88,7 +89,7 @@ public class Update extends JFrame {
 		JButton delete = new JButton("\uC0AD\uC81C");
 		delete.setForeground(new Color(255, 255, 255));
 		delete.setBackground(Color.BLACK);
-		delete.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
+		delete.setFont(new Font("IM혜민 Bold", Font.PLAIN, 25));
 		delete.setHorizontalAlignment(SwingConstants.RIGHT);
 		delete.addActionListener(new ActionListener() {
 
@@ -118,14 +119,14 @@ public class Update extends JFrame {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 
 		lblNewLabel_1.setBackground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
+		lblNewLabel_1.setFont(new Font("IM혜민 Bold", Font.PLAIN, 28));
 		panel_1.add(lblNewLabel_1);
 		
 		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String today = sdFormat.format(dto.getDay());
 		
 		dayTxt = new JTextField();
-		dayTxt.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
+		dayTxt.setFont(new Font("IM혜민 Bold", Font.PLAIN, 23));
 		panel_1.add(dayTxt);
 		dayTxt.setColumns(10);
 		dayTxt.setText(today);
@@ -133,24 +134,24 @@ public class Update extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("내역");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBackground(new Color(255, 255, 255));
-		lblNewLabel_2.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
+		lblNewLabel_2.setFont(new Font("IM혜민 Bold", Font.PLAIN, 28));
 
 
 		panel_1.add(lblNewLabel_2);
 		combdBox = new JComboBox();
-		combdBox.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
+		combdBox.setFont(new Font("IM혜민 Bold", Font.PLAIN, 23));
 		combdBox.setModel(new DefaultComboBoxModel(PayKind));
 		panel_1.add(combdBox);
 		JLabel lblNewLabel_3 = new JLabel("\uAE08\uC561");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
+		lblNewLabel_3.setFont(new Font("IM혜민 Bold", Font.PLAIN, 28));
 
 		panel_1.add(lblNewLabel_3);
 		
 		String strMoney = String.valueOf(dto.getMoney());
 		
 		moneyTxt = new JTextField();
-		moneyTxt.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
+		moneyTxt.setFont(new Font("IM혜민 Bold", Font.PLAIN, 23));
 		panel_1.add(moneyTxt);
 		moneyTxt.setColumns(10);
 		moneyTxt.setText(strMoney);
@@ -162,12 +163,12 @@ public class Update extends JFrame {
 
 		JLabel lblNewLabel = new JLabel(" 수정");
 		lblNewLabel.setIcon(new ImageIcon(Update.class.getResource("/AccountBook/edit (2).png")));
-		lblNewLabel.setFont(new Font("IM혜민 Bold", Font.PLAIN, 25));
+		lblNewLabel.setFont(new Font("IM혜민 Bold", Font.PLAIN, 30));
 
 		panel_2.add(lblNewLabel);
 		rdbtnIncom = new JRadioButton("\uC218\uC785");
 
-		rdbtnIncom.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
+		rdbtnIncom.setFont(new Font("IM혜민 Bold", Font.PLAIN, 23));
 		rdbtnIncom.setBackground(Color.WHITE);
 
 
@@ -183,7 +184,7 @@ public class Update extends JFrame {
 		panel_2.add(lblNewLabel_4);
 		panel_2.add(rdbtnIncom);
 		rdbtnExpense = new JRadioButton("\uC9C0\uCD9C");
-		rdbtnExpense.setFont(new Font("IM혜민 Bold", Font.PLAIN, 15));
+		rdbtnExpense.setFont(new Font("IM혜민 Bold", Font.PLAIN, 23));
 		rdbtnExpense.setBackground(Color.WHITE);
 		rdbtnExpense.addItemListener(new ItemListener() {
 			@Override

@@ -6,11 +6,14 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.util.Formatter;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -42,6 +45,8 @@ public class Report extends JFrame {
 	private JComboBox yearBox;
 	private int year=21;
 	private int month=1;
+	private DecimalFormat formatter = new DecimalFormat("###,###원");
+	
 
 	/**
 	 * Launch the application.
@@ -63,8 +68,9 @@ public class Report extends JFrame {
 	 * Create the frame.
 	 */
 	public Report() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Report.class.getResource("/AccountBook/pigbank.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 470, 410);
+		setBounds(100, 100, 670, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -79,6 +85,7 @@ public class Report extends JFrame {
 
 		JButton btnNewButton = new JButton("Back");
 		btnNewButton.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnNewButton.setFont(new Font("IM혜민 Bold", Font.PLAIN, 23));
 		btnNewButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -97,6 +104,7 @@ public class Report extends JFrame {
 		panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
 		comboBox = new JComboBox();
+		comboBox.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		comboBox.setModel(new DefaultComboBoxModel(Month));
 		comboBox.addItemListener(new ItemListener() {
 
@@ -121,6 +129,7 @@ public class Report extends JFrame {
 		});
 		
 		yearBox = new JComboBox();
+		yearBox.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 		yearBox.setModel(new DefaultComboBoxModel(Year));
 		yearBox.addItemListener(new ItemListener() {
 			
@@ -168,24 +177,24 @@ public class Report extends JFrame {
 				expence1 = (int) 360.0 * expence / sum;
 				income1 = (int) 360.0 * income / sum;
 				g.setColor(Color.blue);
-				g.fillArc(50, 20, 200, 200, 0, (int) income1);
+				g.fillArc(50, 20, 300, 300, 0, (int) income1);
 				g.setColor(Color.red);
-				g.fillArc(50, 20, 200, 200, (int) income1, (int) expence1);
-				g.setFont(new Font("굴림체", Font.PLAIN, 12));
+				g.fillArc(50, 20, 300, 300, (int) income1, (int) expence1);
+				g.setFont(new Font("굴림체", Font.PLAIN, 20));
 				g.setColor(Color.blue);
-				g.drawString("수입: " + income + "원(" + Math.round((double) (100 * (double) income / sum * 100)) / 100.0
-						+ "%" + ")", 300, 150);
+				g.drawString("수입: " + formatter.format(income) + "(" +  Math.round((double) (100 * (double) income / sum * 100)) / 100.0
+						+ "%" + ")", 380, 270);
 				g.setColor(Color.red);
-				g.drawString("지출: " + expence + "원(" + Math.round((double) (100 * (double) expence / sum * 100)) / 100.0
-						+ "%" + ")", 300, 180);
+				g.drawString("지출: " + formatter.format(expence) + "(" + Math.round((double) (100 * (double) expence / sum * 100)) / 100.0
+						+ "%" + ")", 380, 240);
 			}else {
 				g.setColor(Color.gray);
-				g.fillArc(50, 20, 200, 200, 0, 360);
-				g.setFont(new Font("굴림체", Font.PLAIN, 12));
+				g.fillArc(50, 20, 300, 300, 0, 360);
+				g.setFont(new Font("굴림체", Font.PLAIN, 20));
 				g.setColor(Color.blue);
-				g.drawString("수입: 0원(0%)", 300, 150);
+				g.drawString("수입: 0원(0%)", 380, 280);
 				g.setColor(Color.red);
-				g.drawString("지출: 0원(0%)", 300, 180);
+				g.drawString("지출: 0원(0%)", 380, 250);
 			}
 		}
 	}
