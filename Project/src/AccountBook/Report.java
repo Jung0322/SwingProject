@@ -70,7 +70,7 @@ public class Report extends JFrame {
 	public Report() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Report.class.getResource("/AccountBook/pigbank.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 670, 550);
+		setBounds(100, 100, 670, 520);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -180,7 +180,7 @@ public class Report extends JFrame {
 				g.fillArc(50, 20, 300, 300, 0, (int) income1);
 				g.setColor(Color.red);
 				g.fillArc(50, 20, 300, 300, (int) income1, (int) expence1);
-				g.setFont(new Font("굴림체", Font.PLAIN, 20));
+				g.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 				g.setColor(Color.blue);
 				g.drawString("수입: " + formatter.format(income) + "(" +  Math.round((double) (100 * (double) income / sum * 100)) / 100.0
 						+ "%" + ")", 380, 270);
@@ -190,7 +190,7 @@ public class Report extends JFrame {
 			}else {
 				g.setColor(Color.gray);
 				g.fillArc(50, 20, 300, 300, 0, 360);
-				g.setFont(new Font("굴림체", Font.PLAIN, 20));
+				g.setFont(new Font("IM혜민 Bold", Font.PLAIN, 20));
 				g.setColor(Color.blue);
 				g.drawString("수입: 0원(0%)", 380, 280);
 				g.setColor(Color.red);

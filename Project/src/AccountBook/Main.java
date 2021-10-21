@@ -55,7 +55,7 @@ public class Main extends JFrame{
 	private int val = 0;
 
 	private DecimalFormat formatter = new DecimalFormat("###,###원");
-	private String kind[] = { "수입", "지출","전체" };
+	private String kind[] = { "전체","수입", "지출" };
 	private JComboBox<String> comboBox;
 
 
@@ -238,7 +238,7 @@ public class Main extends JFrame{
 		});
 		panel.add(comboBox);
 		 scrollPane.setViewportView(table);
-		IncomeshowTable();
+		TotalshowTable();
         
  
 	}
