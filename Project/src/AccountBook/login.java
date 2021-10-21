@@ -16,9 +16,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 public class login extends JFrame {
 
@@ -48,6 +51,9 @@ public class login extends JFrame {
 	 * Create the frame.
 	 */
 	public login() {
+		setTitle("알뜰살뜰 가계부_티끌모아 건물주되자!!");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\pigbank.png"));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -75,6 +81,7 @@ public class login extends JFrame {
 		panel_1.add(lbl5);
 		
 		JLabel lblId = new JLabel("ID");
+		lblId.setFont(new Font("굴림", Font.BOLD, 14));
 		lblId.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblId);
 		
@@ -82,13 +89,17 @@ public class login extends JFrame {
 		panel_1.add(textId);
 		textId.setColumns(10);
 		
-		JLabel lbl6 = new JLabel("");
+		JLabel lbl6 = 	new JLabel("");
+		lbl6.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbl6.setIcon(null);
+
 		panel_1.add(lbl6);
 		
 		JLabel lbl7 = new JLabel("");
 		panel_1.add(lbl7);
 		
 		JLabel lblPw = new JLabel("PW");
+		lblPw.setFont(new Font("굴림", Font.BOLD, 14));
 		lblPw.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_1.add(lblPw);
 		
@@ -116,7 +127,8 @@ public class login extends JFrame {
 		flowLayout_1.setVgap(20);
 		contentPane.add(panel_2, BorderLayout.SOUTH);
 		
-		JButton btnLogin = new JButton("Login");
+		JButton btnLogin = new JButton("로그인");
+		btnLogin.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\check-mark-3-16.png"));
 		btnLogin.addActionListener(new ActionListener() {
 			
 			@Override
@@ -127,22 +139,26 @@ public class login extends JFrame {
 					id = textId.getText();
 					Main main = new Main();
 					main.setVisible(true);
+//					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					dispose();
 				}else {
 					JOptionPane.showMessageDialog(null, "로그인이 실패히었습니다.");
 				}
 				
-			}
+
+}
 		});
 		panel_2.add(btnLogin);
 		
-		JButton btnJoin = new JButton("Join");
+		JButton btnJoin = new JButton("회원가입");
+		btnJoin.setIcon(new ImageIcon("C:\\SwingProject\\SwingProject\\Project\\src\\AccountBook\\arrow-34-16.png"));
 		btnJoin.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Join join = new Join();
 				join.setVisible(true);
+//				frame.setVisible(false);
 				dispose();
 			}
 		});
@@ -153,7 +169,8 @@ public class login extends JFrame {
 		flowLayout.setVgap(20);
 		contentPane.add(panel, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel = new JLabel("\uAC00\uACC4\uBD80");
+		JLabel lblNewLabel = new JLabel("알뜰살뜰 가계부");
+		lblNewLabel.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		panel.add(lblNewLabel);
 	}
 
